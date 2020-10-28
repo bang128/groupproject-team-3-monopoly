@@ -47,7 +47,7 @@ public class Character{
 	}
 
 	public void setMoney(int money) {
-		this.money = money;
+		this.money += money;
 	}
 
 	public boolean isMove() {
@@ -73,7 +73,7 @@ public class Character{
 	public void setPosition(Space position) {
 		this.position = position;
 	}
-	
+
 	public String toString() {
 		String s;
 		s="CharacterType: "+type.toString();
