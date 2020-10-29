@@ -13,11 +13,12 @@ public class Building extends Items {
 	}
 	
 	public void setOwner(Character o) {owner = o;}
+	
 	public Character getOwner() { return owner;}
 	
-	@Override
 	public void visit(Character player) {
-		if (owner == new Character(CharacterType.NONAME, 0,0,0,false)) {
+		Character noname = new Character(CharacterType.NONAME, 0,0,0,false);
+		if (owner == noname) {
 			Object[] options = { "Yes", "No" };
 			boolean choice = handleOption(options, "Empty Property", "This is an empty property. Would you like to buy it? $500");
 			if (choice) {

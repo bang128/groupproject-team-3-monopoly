@@ -11,7 +11,6 @@ public class Items {
 	public char getSymbol() {
 		return symbol;
 	}
-	public void visit(Character player) {}
 	
 	public boolean handleOption(Object[] options, String popup_name, String message) {
 		int choice = JOptionPane.showOptionDialog(null, message, popup_name, JOptionPane.YES_NO_OPTION,
