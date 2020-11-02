@@ -15,8 +15,8 @@ public class Items {
 	public boolean handleOption(Object[] options, String popup_name, String message) {
 		int choice = JOptionPane.showOptionDialog(null, message, popup_name, JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-		System.exit(0);
 		if (choice == JOptionPane.YES_OPTION) {  
+			System.exit(0);
 			return true;
 		}
 		return false;

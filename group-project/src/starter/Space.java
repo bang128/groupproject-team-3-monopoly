@@ -1,6 +1,7 @@
 package starter;
 import java.util.*;
 public class Space {
+	
 	private int r;
 	private int c;
 	

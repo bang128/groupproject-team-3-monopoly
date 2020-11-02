@@ -23,8 +23,15 @@ public class Building extends Items {
 			boolean choice = handleOption(options, "Empty Property", "This is an empty property. Would you like to buy it? $500");
 			if (choice) {
 				player.setMoney(player.getMoney() - 500);
-				setOwner(player);
-				
+				setOwner(player);	
+			}
+			else System.exit(0);
+		}
+		else if (owner != player && owner != noname) {
+			Object[] options = {"OK"};
+			boolean choice = handleOption(options, "Building", "You have to pay $50 for the owner of this building.");
+			if (choice) {
+				player.setMoney(player.getMoney() - 50);
 			}
 		}
 	}
