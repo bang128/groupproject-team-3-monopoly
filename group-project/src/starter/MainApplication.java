@@ -14,7 +14,7 @@ public class MainApplication extends GraphicsApplication {
 	}
 
 	public void run() {
-		System.out.println("Hello, world!");
+		System.out.println("Exit");
 		somePane = new SomePane(this);
 		menu = new MenuPane(this);
 		switchToMenu();
@@ -31,8 +31,8 @@ public class MainApplication extends GraphicsApplication {
 		switchToScreen(somePane);
 	}
 
-	/*private void playRandomSound() {
-		AudioPlayer audio = AudioPlayer.getInstance();
-		audio.playSound(MUSIC_FOLDER, SOUND_FILES[count % SOUND_FILES.length]);
-	}*/
+//	private void playRandomSound() {
+//		AudioPlayer audio = AudioPlayer.getInstance();
+//		audio.playSound(MUSIC_FOLDER, SOUND_FILES[count % SOUND_FILES.length]);
+//	}
 }
