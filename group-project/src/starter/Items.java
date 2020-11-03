@@ -5,6 +5,11 @@ import javax.swing.JOptionPane;
 
 public class Items {
 	protected char symbol;
+
+	
+	public Items() {
+		symbol = ' ';
+	}
 	public void setSymbol(char s){
 		symbol = s;
 	}

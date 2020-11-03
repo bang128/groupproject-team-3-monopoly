@@ -5,7 +5,7 @@ public class Building extends Items {
 	
 	public Building() {
 		symbol = 'b';
-		owner = new Character(CharacterType.NONAME, 0,0,0,false);
+		owner = null;
 	}
 	public Building(char s, Character o) {
 		symbol = s;
@@ -17,8 +17,7 @@ public class Building extends Items {
 	public Character getOwner() { return owner;}
 	
 	public void visit(Character player) {
-		Character noname = new Character(CharacterType.NONAME, 0,0,0,false);
-		if (owner == noname) {
+		if (owner == null) {
 			Object[] options = { "Yes", "No" };
 			boolean choice = handleOption(options, "Empty Property", "This is an empty property. Would you like to buy it? $500");
 			if (choice) {
@@ -27,7 +26,7 @@ public class Building extends Items {
 			}
 			else System.exit(0);
 		}
-		else if (owner != player && owner != noname) {
+		else if (owner != player && owner != null) {
 			Object[] options = {"OK"};
 			boolean choice = handleOption(options, "Building", "You have to pay $50 for the owner of this building.");
 			if (choice) {
