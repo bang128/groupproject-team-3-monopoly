@@ -98,6 +98,4 @@ public class Character{
 			getPosition().setCol(getPosition().getCol()+numSpaces);
 		}
 	}
-	
-	
 }

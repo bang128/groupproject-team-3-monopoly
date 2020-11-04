@@ -26,5 +26,10 @@ public class Items {
 		}
 		return false;
 	}
+	public void visit(Character Player) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	
 }
