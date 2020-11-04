@@ -12,7 +12,7 @@ public class SomePane extends GraphicsPane {
 	public SomePane(MainApplication app) {
 		this.program = app;
 		board = new GImage("BoardPic.jpg", 100, 100);
-
+	//	game.drawGrid();
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class SomePane extends GraphicsPane {
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == board) {
-			program.switchToMenu();
+			program.switchToGraphicsGame();
 		}
 	}
 }

@@ -38,6 +38,7 @@ public class MenuPane extends GraphicsPane {
 	public void hideContents() {
 		program.remove(play_button);
 		program.remove(quit_button);
+		program.remove(label);
 	}
 
 	@Override
