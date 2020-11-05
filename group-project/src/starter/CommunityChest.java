@@ -3,9 +3,12 @@ import java.util.Random;
 import java.util.*;
 
 public class CommunityChest extends Items {
+	public CommunityChest() {
+		name = "cc";
+	}
 
-@Override
-public void visit (Character Player) {
+	@Override
+	public void visit (Character Player) {
 		Random r = new Random();
 		int r_1=r.nextInt(100) ;
 		Object[] options = { "Yes", "No" };

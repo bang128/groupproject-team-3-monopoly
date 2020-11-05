@@ -4,11 +4,11 @@ public class Building extends Items {
 	private Character owner;
 	
 	public Building() {
-		symbol = 'b';
+		name = "empty";
 		owner = null;
 	}
-	public Building(char s, Character o) {
-		symbol = s;
+	public Building(String n, Character o) {
+		name = n;
 		owner = o;
 	}
 	
@@ -22,7 +22,8 @@ public class Building extends Items {
 			boolean choice = handleOption(options, "Empty Property", "This is an empty property. Would you like to buy it? $500");
 			if (choice) {
 				player.setMoney(player.getMoney() - 500);
-				setOwner(player);	
+				setOwner(player);
+				setName("owned");
 			}
 			else System.exit(0);
 		}

@@ -41,6 +41,7 @@ public class Level {
 			board[row][nCols - 1] = new Chance();
 			col = generator.nextInt(nCols - 2) + 1;
 			board[0][col] = new Chance();
+			col = generator.nextInt(nCols - 2) + 1;
 			board[nRows - 1][col] = new Chance();
 		}
 		
@@ -54,6 +55,18 @@ public class Level {
 			col = generator.nextInt(nCols - 2) + 1;
 			board[nRows - 1][col] = new CommunityChest();
 		}
+		
+		for (int i = 0; i < 1; i++) {
+			row = generator.nextInt(nRows - 2) + 1;
+			board[row][0] = new Tax();
+			row = generator.nextInt(nRows - 2) + 1;
+			board[row][nCols - 1] = new Tax();
+			col = generator.nextInt(nCols - 2) + 1;
+			board[0][col] = new Tax();
+			col = generator.nextInt(nCols - 2) + 1;
+			board[nRows - 1][col] = new Tax();
+		}
+		
 		characters.add(new Character(CharacterType.PLAYER1, nRows -1, nCols - 1, 2000, true));
 		characters.add(new Character(CharacterType.PLAYER2, nRows -1, nCols - 1, 2000, true));
 		
@@ -86,6 +99,5 @@ public class Level {
 	public void setnCols(int nCols) {
 		this.nCols = nCols;
 	}
-	
 
 }

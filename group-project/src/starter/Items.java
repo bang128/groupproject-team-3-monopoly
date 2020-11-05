@@ -4,17 +4,17 @@ import java.lang.Object;
 import javax.swing.JOptionPane;
 
 public class Items {
-	protected char symbol;
+	protected String name;
 
 	
 	public Items() {
-		symbol = ' ';
+		name = "";
 	}
-	public void setSymbol(char s){
-		symbol = s;
+	public void setName(String n){
+		name = n;
 	}
-	public char getSymbol() {
-		return symbol;
+	public String getName() {
+		return name;
 	}
 	
 	public boolean handleOption(Object[] options, String popup_name, String message) {
