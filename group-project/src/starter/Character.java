@@ -4,7 +4,6 @@ import java.util.*;
 public class Character{
 	private CharacterType type;
 	private Space position;
-	private Space start;
 	private int row;
 	private int col;
 	private int money;
@@ -16,6 +15,7 @@ public class Character{
 		this.setCol(col);
 		this.setMoney(money);
 		this.setMove(move);
+		position = new Space(row, col);
 	}
 
 	public CharacterType getType() {
@@ -57,14 +57,6 @@ public class Character{
 	public void setMove(boolean move) {
 		this.move = move;
 	}
-	
-	public Space getStart() {
-		return start;
-	}
-
-	public void setStart(Space start) {
-		this.start = start;
-	}
 
 	public Space getPosition() {
 		return position;
@@ -80,22 +72,23 @@ public class Character{
 		return s;
 		}
 	
-	public Space ifIWereToMove(int numSpaces) {
-		Space pre = getPosition();
+	public Space ifIWereToMove(int numRows, int numCols) {
 		if (move == true) {
-			pre.setRow(getPosition().getRow() + numSpaces);
-			return pre;
+			return new Space(row + numRows, col + numCols);
 		}
-		pre.setCol(getPosition().getCol() + numSpaces);
-		return pre;
+		return null;
 	}
 	
-	public void move(int numSpaces) {
-		if(move==false) {
-			getPosition().setRow(getPosition().getRow()+numSpaces);
+	public void move(int numRows, int numCols) {
+		if(move) {
+			row = row + numRows;
+			col = col + numCols;
+			setPosition(new Space(row, col));
 		}
-		else {
-			getPosition().setCol(getPosition().getCol()+numSpaces);
-		}
+	}
+	public static void main(String[] args)  {
+		Character c = new Character(CharacterType.PLAYER1, 0, 0, 100, true);
+		c.ifIWereToMove(5, 0);
+		System.out.print(c.ifIWereToMove(5, 0));
 	}
 }

@@ -21,7 +21,6 @@ public class GraphicsGame extends GraphicsPane {
 	private GDimension normal_vertical;
 	private GDimension normal_horizontal;
 	private Items[][] board;
-	private Character turn;
 	private MainApplication program;
 
 	
@@ -32,10 +31,7 @@ public class GraphicsGame extends GraphicsPane {
 		normal_vertical = new GDimension(SpaceWidth() - 1, SPECIAL_HEIGHT - 1);
 		normal_horizontal = new GDimension(SPECIAL_WIDTH - 1, SpaceHeight() - 1);
 		board = level.getBoard();
-		Random generator = new Random();
-		int r = generator.nextInt();
-		if (r % 2 == 0) turn = level.characters.get(0);
-		else turn = level.characters.get(1);
+		
 		
 	}
 	private double SpaceHeight() {
