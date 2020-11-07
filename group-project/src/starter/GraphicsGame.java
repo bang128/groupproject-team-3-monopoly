@@ -22,6 +22,7 @@ public class GraphicsGame extends GraphicsPane {
 	private GDimension normal_horizontal;
 	private Items[][] board;
 	private MainApplication program;
+	
 
 	
 	public GraphicsGame(MainApplication app) {
@@ -102,16 +103,8 @@ public class GraphicsGame extends GraphicsPane {
 		}
 	}
 	public void drawAllBoard() {}
+
 	
-	public int RollDice1() {
-		Random generator = new Random();
-		return generator.nextInt(6) + 1;
-	}
-	
-	public int RollDice2() {
-		Random generator = new Random();
-		return generator.nextInt(6) + 1;
-	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
@@ -127,7 +120,5 @@ public class GraphicsGame extends GraphicsPane {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
 
 }

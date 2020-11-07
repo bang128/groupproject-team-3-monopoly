@@ -12,9 +12,13 @@ public class Building extends Items {
 		owner = o;
 	}
 	
-	public void setOwner(Character o) {owner = o;}
+	public void setOwner(Character o) {
+		owner = o;
+		}
 	
-	public Character getOwner() { return owner;}
+	public Character getOwner() { 
+		return owner;
+		}
 	
 	public void visit(Character player) {
 		if (owner == null) {
