@@ -11,19 +11,17 @@ public class dice {
 	boolean same = true ;
 	private int totalSame=0;
 	
-	
-	
 	public dice() {
 		setName("dice");
 	}
 	
-	public int total() {
-		Random dice1 = new Random();
-		 d_1=dice1.nextInt(6) + 1;
-		Random dice2 = new Random();
-		 d_2=dice2.nextInt(6) + 1;
-		return total=d_1+d_2;
-	
+	public int getDice1() {
+		Random r = new Random();
+		return r.nextInt(6) + 1;
+	}
+	public int getDice2() {
+		Random r = new Random();
+		return r.nextInt(6) + 1;
 	}
 	
 	public void bothDicesSame() {
@@ -32,8 +30,8 @@ public class dice {
 			totalSame+=1;
 		}
 		else {
-				same=false;
-				totalSame=0;
+			same=false;
+			totalSame=0;
 		}
 	}
 	
@@ -42,9 +40,10 @@ public class dice {
 			System.out.println("You have been sent to jail.");
 		}
 	}
+	
 	public static void main(String[] args) {
 		dice d= new dice();
-		System.out.println("total:"+d.total()+"\ndice1: "+d.d_1+"\ndice2:"+d.d_2);
+		//System.out.println("total:"+d.total()+"\ndice1:"+d.d_1+"\ndice2:"+d.d_2);
 	}
 
 	public String getName() {

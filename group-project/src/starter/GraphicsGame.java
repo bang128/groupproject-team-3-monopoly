@@ -22,8 +22,9 @@ public class GraphicsGame extends GraphicsPane {
 	private GDimension normal_horizontal;
 	private Items[][] board;
 	private MainApplication program;
-	
-
+	private GImage dice1;
+	private GImage dice2;
+	private ArrayList<String> dices;
 	
 	public GraphicsGame(MainApplication app) {
 		this.program = app;
@@ -32,7 +33,18 @@ public class GraphicsGame extends GraphicsPane {
 		normal_vertical = new GDimension(SpaceWidth() - 1, SPECIAL_HEIGHT - 1);
 		normal_horizontal = new GDimension(SPECIAL_WIDTH - 1, SpaceHeight() - 1);
 		board = level.getBoard();
-		
+		dice1 = new GImage("dice.png", BOARD_WIDTH/2 - 125, BOARD_HEIGHT/2 - 50);
+		dice1.setSize(100,100);
+		dice2 = new GImage("dice.png", BOARD_WIDTH/2 + 25, BOARD_HEIGHT/2 - 50);
+		dice2.setSize(100,100);
+		dices = new ArrayList<String>();
+		dices.add("dice.png");
+		dices.add("dice1.png");
+		dices.add("dice2.png");
+		dices.add("dice3.png");
+		dices.add("dice4.png");
+		dices.add("dice5.png");
+		dices.add("dice6.png");
 		
 	}
 	private double SpaceHeight() {
@@ -65,7 +77,10 @@ public class GraphicsGame extends GraphicsPane {
 	public void drawInventories() {
 		
 	}
-	public void drawDices() {}
+	public void drawDices() {
+		program.add(dice1);
+		program.add(dice2);
+	}
 
 	public void drawItems() {
 		GImage go_pic = new GImage("go.png", BOARD_WIDTH - SPECIAL_WIDTH + 1, BOARD_HEIGHT - SPECIAL_HEIGHT + 1);
@@ -102,23 +117,25 @@ public class GraphicsGame extends GraphicsPane {
 			program.add(pic_bottom);	
 		}
 	}
-	public void drawAllBoard() {}
+	public void drawAllBoard() {
+		drawGrid();
+		drawItems();
+		drawDices();
+	}
 
 	
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		
-	}
+	public void mouseClicked(MouseEvent e) {}
 	@Override
 	public void showContents() {
 		// TODO Auto-generated method stub
-		drawGrid();
-		drawItems();
+		drawAllBoard();
 	}
 	@Override
 	public void hideContents() {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }
