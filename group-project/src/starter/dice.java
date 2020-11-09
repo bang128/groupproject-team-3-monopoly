@@ -10,12 +10,11 @@ public class dice {
 	private int d_2=0;
 	private int totalSame=0;
 	
-	
-	
 	public dice() {
 		setName("dice");
 	}
 	
+
 	public int total() { //Roll the dice
 		Random dice1 = new Random();
 		 d_1=dice1.nextInt(6) + 1;
@@ -24,7 +23,13 @@ public class dice {
 		 total += d_1 + d_2;
 		 bothDicesSame();
 		 return total;
-		
+}
+
+	public int getDice1() {
+		return d_1;
+	}
+	public int getDice2() {
+		return d_2;
 	}
 	
 	public void bothDicesSame() {
@@ -42,11 +47,13 @@ public class dice {
 			System.out.println("You have been sent to jail.");
 		}
 	}
+	
 	public static void main(String[] args) {
 		dice d= new dice();
 		d.total = 0;
 		System.out.println("total:"+d.total()+"\ndice1: "+d.d_1+"\ndice2:"+d.d_2);
 		System.out.println(d.totalSame);
+
 	}
 
 	public String getName() {
