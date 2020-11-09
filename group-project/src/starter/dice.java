@@ -8,7 +8,6 @@ public class dice {
 	private int total=0;
 	private int d_1=0;
 	private int d_2=0;
-	boolean same = true ;
 	private int totalSame=0;
 	
 	
@@ -17,23 +16,24 @@ public class dice {
 		setName("dice");
 	}
 	
-	public int total() {
+	public int total() { //Roll the dice
 		Random dice1 = new Random();
 		 d_1=dice1.nextInt(6) + 1;
 		Random dice2 = new Random();
 		 d_2=dice2.nextInt(6) + 1;
-		return total=d_1+d_2;
-	
+		 total += d_1 + d_2;
+		 bothDicesSame();
+		 return total;
+		
 	}
 	
 	public void bothDicesSame() {
 		if (d_1==d_2) {
-			same=true;
 			totalSame+=1;
+			gotToJail();
+			total(); //Roll again if you get a double
 		}
 		else {
-				same=false;
-				totalSame=0;
 		}
 	}
 	
@@ -44,7 +44,9 @@ public class dice {
 	}
 	public static void main(String[] args) {
 		dice d= new dice();
+		d.total = 0;
 		System.out.println("total:"+d.total()+"\ndice1: "+d.d_1+"\ndice2:"+d.d_2);
+		System.out.println(d.totalSame);
 	}
 
 	public String getName() {
