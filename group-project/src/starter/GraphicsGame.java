@@ -163,7 +163,7 @@ public class GraphicsGame extends GraphicsPane {
 	}
 	public void move() {
 		if(click_dice1 && click_dice2) {
-			program.pause(00);
+			program.pause(500);
 			System.out.print(level.getTurn().getPosition());
 			level.moveNumSpaces(num1 + num2);
 			if (level.getTurn().getType() == level.characters.get(0).getType())
