@@ -29,7 +29,6 @@ public class Building extends Items {
 				setOwner(player);
 				setName("owned");
 			}
-			else System.exit(0);
 		}
 		else if (owner != player && owner != null) {
 			Object[] options = {"OK"};

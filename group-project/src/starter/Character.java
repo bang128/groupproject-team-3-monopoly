@@ -8,13 +8,15 @@ public class Character{
 	private int col;
 	private int money;
 	private boolean move;
+	private int same;
 	
-	public Character( CharacterType type, int row, int col, int money, boolean move){
+	public Character( CharacterType type, int row, int col, int money, boolean move, int same){
 		this.setType(type);
 		this.setRow(row);
 		this.setCol(col);
 		this.setMoney(money);
 		this.setMove(move);
+		this.setSame(same);
 		position = new Space(row, col);
 	}
 
@@ -87,8 +89,16 @@ public class Character{
 		}
 	}
 	public static void main(String[] args)  {
-		Character c = new Character(CharacterType.PLAYER1, 0, 0, 100, true);
+		Character c = new Character(CharacterType.PLAYER1, 0, 0, 100, true, 0);
 		c.ifIWereToMove(5, 0);
 		System.out.print(c.ifIWereToMove(5, 0));
+	}
+
+	public int getSame() {
+		return same;
+	}
+
+	public void setSame(int same) {
+		this.same = same;
 	}
 }

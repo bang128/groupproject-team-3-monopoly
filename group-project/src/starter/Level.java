@@ -72,10 +72,12 @@ public class Level {
 			board[nRows - 1][col] = new Tax();
 		}
 		
-		characters.add(new Character(CharacterType.PLAYER1, nRows -1, nCols - 1, 2000, true));
-		characters.add(new Character(CharacterType.PLAYER2, nRows -1, nCols - 1, 2000, true));
+		characters.add(new Character(CharacterType.PLAYER1, nRows -1, nCols - 1, 2000, true, 0));
+		characters.add(new Character(CharacterType.PLAYER2, nRows -1, nCols - 1, 2000, true, 0));
 		
 	}
+	
+	public Items getBoardAt(int r, int c) {return board[r][c];}
 	
 	public void moveNumSpaces(int numSpaces) {
 		Space pre = null;
@@ -182,6 +184,10 @@ public class Level {
 		if (turn == characters.get(0)) turn = characters.get(1);
 		else turn = characters.get(0);
 	}
+	/*public boolean checkInJail() {
+		if ((turn.getRow() = 0 && turn.getCol() == nCols -1) || turn.getSame() == 3)
+		return false;
+	}*/
 	
 	
 	public static void main(String[] args)  {

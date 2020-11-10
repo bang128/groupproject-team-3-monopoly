@@ -159,9 +159,6 @@ public class GraphicsGame extends GraphicsPane {
 		
 	}
 	public void mouseReleased(MouseEvent e) {
-		move();
-	}
-	public void move() {
 		if(click_dice1 && click_dice2) {
 			program.pause(500);
 			System.out.print(level.getTurn().getPosition());
@@ -170,6 +167,8 @@ public class GraphicsGame extends GraphicsPane {
 				location(players.get(0), level.getTurn());
 			else location(players.get(1), level.getTurn());
 			System.out.print(level.getTurn().getPosition());
+			level.getBoardAt(level.getTurn().getRow(), level.getTurn().getCol()).visit(level.getTurn());
+			System.out.println(level.characters.get(0).getMoney());
 			num1 = 0; num2 = 0;
 			program.pause(1000);
 			dice1.setImage("dice.png");
@@ -180,6 +179,7 @@ public class GraphicsGame extends GraphicsPane {
 			
 		}
 	}
+
 	public void location(GImage i, Character c) {
 		double x = 0;
 		double y = 0;
@@ -206,7 +206,6 @@ public class GraphicsGame extends GraphicsPane {
 		// TODO Auto-generated method stub
 		drawAllBoard();
 		program.addMouseListeners();
-		move();
 	}
 	@Override
 	public void hideContents() {
