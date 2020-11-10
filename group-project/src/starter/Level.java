@@ -48,6 +48,9 @@ public class Level {
 			board[0][col] = new Chance();
 			col = generator.nextInt(nCols - 2) + 1;
 			board[nRows - 1][col] = new Chance();
+		}
+		
+		for (int i = 0; i < 1; i++) {
 			row = generator.nextInt(nRows - 2) + 1;
 			board[row][0] = new CommunityChest();
 			row = generator.nextInt(nRows - 2) + 1;
@@ -56,6 +59,9 @@ public class Level {
 			board[0][col] = new CommunityChest();
 			col = generator.nextInt(nCols - 2) + 1;
 			board[nRows - 1][col] = new CommunityChest();
+		}
+		
+		for (int i = 0; i < 1; i++) {
 			row = generator.nextInt(nRows - 2) + 1;
 			board[row][0] = new Tax();
 			row = generator.nextInt(nRows - 2) + 1;
@@ -66,20 +72,12 @@ public class Level {
 			board[nRows - 1][col] = new Tax();
 		}
 		
-		
 		characters.add(new Character(CharacterType.PLAYER1, nRows -1, nCols - 1, 2000, true));
 		characters.add(new Character(CharacterType.PLAYER2, nRows -1, nCols - 1, 2000, true));
 		
 	}
 	
-	/*
-	 if(getElementAt(e.getX(),e.getY()) == Dices) {
-	 int dice1 = RollDice1();
-	 int dice2 = Roll
-	 }
-	 */
-	
-	public void moveNumSpaces(int numSpaces) { 
+	public void moveNumSpaces(int numSpaces) {
 		Space pre = null;
 		//System.out.println("num: " + numSpaces);
 		if (turn.getRow() == nRows - 1 && turn.getCol() == nCols - 1) {

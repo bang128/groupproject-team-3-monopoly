@@ -8,30 +8,35 @@ public class dice {
 	private int total=0;
 	private int d_1=0;
 	private int d_2=0;
-	boolean same = true ;
 	private int totalSame=0;
 	
 	public dice() {
 		setName("dice");
 	}
 	
+
+	public int total() { //Roll the dice
+		return d_1 + d_2;
+	}
+
 	public int getDice1() {
 		Random r = new Random();
-		return r.nextInt(6) + 1;
+		d_1 = r.nextInt(6) + 1;
+		return d_1;
 	}
 	public int getDice2() {
 		Random r = new Random();
-		return r.nextInt(6) + 1;
+		d_2 = r.nextInt(6) + 1;
+		return d_2;
 	}
 	
 	public void bothDicesSame() {
 		if (d_1==d_2) {
-			same=true;
 			totalSame+=1;
+			gotToJail();
+			total(); //Roll again if you get a double
 		}
 		else {
-			same=false;
-			totalSame=0;
 		}
 	}
 	
@@ -43,7 +48,10 @@ public class dice {
 	
 	public static void main(String[] args) {
 		dice d= new dice();
-		//System.out.println("total:"+d.total()+"\ndice1:"+d.d_1+"\ndice2:"+d.d_2);
+		d.total = 0;
+		System.out.println("total:"+d.total()+"\ndice1: "+d.d_1+"\ndice2:"+d.d_2);
+		System.out.println(d.totalSame);
+
 	}
 
 	public String getName() {
