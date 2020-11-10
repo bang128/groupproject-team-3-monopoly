@@ -25,6 +25,13 @@ public class GraphicsGame extends GraphicsPane {
 	private GImage dice1;
 	private GImage dice2;
 	private ArrayList<String> dices;
+	private dice d;
+	private boolean click_dice1 = false;
+	private boolean click_dice2 = false;
+	int num1 = 0;
+	int num2 = 0;
+	private ArrayList<GImage> players;
+	
 	
 	public GraphicsGame(MainApplication app) {
 		this.program = app;
@@ -33,6 +40,7 @@ public class GraphicsGame extends GraphicsPane {
 		normal_vertical = new GDimension(SpaceWidth() - 1, SPECIAL_HEIGHT - 1);
 		normal_horizontal = new GDimension(SPECIAL_WIDTH - 1, SpaceHeight() - 1);
 		board = level.getBoard();
+		d= new dice();
 		dice1 = new GImage("dice.png", BOARD_WIDTH/2 - 125, BOARD_HEIGHT/2 - 50);
 		dice1.setSize(100,100);
 		dice2 = new GImage("dice.png", BOARD_WIDTH/2 + 25, BOARD_HEIGHT/2 - 50);
@@ -45,6 +53,9 @@ public class GraphicsGame extends GraphicsPane {
 		dices.add("dice4.png");
 		dices.add("dice5.png");
 		dices.add("dice6.png");
+		players = new ArrayList<GImage>();
+		players.add(new GImage("player1.png", level.characters.get(0).getCol() * SpaceWidth() + SPECIAL_WIDTH - 15, level.characters.get(0).getRow() * SpaceHeight() + SPECIAL_HEIGHT - 40));
+		players.add(new GImage("player2.png", level.characters.get(1).getCol() * SpaceWidth() + SPECIAL_WIDTH - 15, level.characters.get(1).getRow() * SpaceHeight() + SPECIAL_HEIGHT));
 		
 	}
 	private double SpaceHeight() {
@@ -53,9 +64,7 @@ public class GraphicsGame extends GraphicsPane {
 	private double SpaceWidth() {
 		return (BOARD_WIDTH - 2*SPECIAL_WIDTH + 1)/(level.getnCols() - 2);
 	}
-	public Space convertXYToSpace(double x, double y) {
-		return new Space(0,0);
-	}
+
 	public void drawGrid() {
 		program.add(new GLine(SPECIAL_WIDTH, 0, SPECIAL_WIDTH, BOARD_HEIGHT));
 		program.add(new GLine(BOARD_WIDTH - SPECIAL_WIDTH, 0, BOARD_WIDTH - SPECIAL_WIDTH, BOARD_HEIGHT));
@@ -73,7 +82,9 @@ public class GraphicsGame extends GraphicsPane {
 			program.add(new GLine(SPECIAL_WIDTH + c*SpaceWidth(),BOARD_HEIGHT - SPECIAL_HEIGHT, SPECIAL_WIDTH + c*SpaceWidth(), BOARD_HEIGHT));
 		}
 	}
-	public void drawCharacter() {}
+	public void drawCharacter() {
+		for (int i = 0; i < 2; i++) {program.add(players.get(i));}
+	}
 	public void drawInventories() {
 		
 	}
@@ -121,15 +132,81 @@ public class GraphicsGame extends GraphicsPane {
 		drawGrid();
 		drawItems();
 		drawDices();
+		drawCharacter();
 	}
 
 	
 	@Override
-	public void mouseClicked(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {
+		//System.out.print(dices + "\n");
+		if(program.getElementAt(e.getX(), e.getY()) == dice1 && !click_dice1) {
+			System.out.println("DICE 1:");
+			click_dice1 = true;
+			num1 = d.getDice1();
+			System.out.print(num1 + " " + num2 + "\n");
+			dice1.setImage(dices.get(num1));
+			System.out.print(dices.get(num1) + "\n");
+		}
+		if(program.getElementAt(e.getX(), e.getY()) == dice2 && !click_dice2) {
+			System.out.println("DICE 2:");
+			click_dice2 = true;
+			num2 = d.getDice2();
+			System.out.println(num1 + " " + num2);
+			dice2.setImage(dices.get(num2));
+			System.out.print(dices.get(num2) + "\n");
+		}
+		
+		
+	}
+	public void mouseReleased(MouseEvent e) {
+		move();
+	}
+	public void move() {
+		if(click_dice1 && click_dice2) {
+			program.pause(500);
+			System.out.print(level.getTurn().getPosition());
+			level.moveNumSpaces(num1 + num2);
+			if (level.getTurn().getType() == level.characters.get(0).getType())
+				location(players.get(0), level.getTurn());
+			else location(players.get(1), level.getTurn());
+			System.out.print(level.getTurn().getPosition());
+			num1 = 0; num2 = 0;
+			program.pause(1000);
+			dice1.setImage("dice.png");
+			dice2.setImage("dice.png");
+			click_dice1 = false;
+			click_dice2 = false;
+			level.changeTurn();
+			
+		}
+	}
+	public void location(GImage i, Character c) {
+		double x = 0;
+		double y = 0;
+		if (c.getRow() == 0 || c.getRow() == level.getnRows() - 1) {
+			if (c.getRow() == 0) y = SPECIAL_HEIGHT/2 - i.getHeight()/2;
+			else y = BOARD_HEIGHT - SPECIAL_HEIGHT/2 - i.getHeight()/2;
+			
+			if (c.getCol() == 0) x = SPECIAL_WIDTH/2 - i.getWidth()/2;
+			else if (c.getCol() == level.getnCols() - 1) x = BOARD_WIDTH - SPECIAL_WIDTH/2 - i.getWidth()/2;
+			else x = SPECIAL_WIDTH + (c.getCol() - 0.5)*SpaceWidth() - i.getWidth()/2;
+		}
+		
+		else {
+			if (c.getCol() == 0) x = SPECIAL_WIDTH/2 - i.getWidth()/2;
+			else x = BOARD_WIDTH - SPECIAL_WIDTH/2 - i.getWidth()/2;
+			
+			y = SPECIAL_HEIGHT + (c.getRow() - 0.5)*SpaceHeight() - i.getHeight()/2;
+		}
+		i.setLocation(x, y);
+		
+	}
 	@Override
 	public void showContents() {
 		// TODO Auto-generated method stub
 		drawAllBoard();
+		program.addMouseListeners();
+		move();
 	}
 	@Override
 	public void hideContents() {

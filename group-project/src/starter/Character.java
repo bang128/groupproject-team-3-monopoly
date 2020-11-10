@@ -66,11 +66,11 @@ public class Character{
 		this.position = position;
 	}
 
+	@Override
 	public String toString() {
-		String s;
-		s="CharacterType: "+type.toString();
-		return s;
-		}
+		return "Character [type=" + type + ", position=" + position + ", row=" + row + ", col=" + col + ", money="
+				+ money + ", move=" + move + "]";
+	}
 	
 	public Space ifIWereToMove(int numRows, int numCols) {
 		if (move == true) {

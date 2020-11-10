@@ -180,6 +180,11 @@ public class Level {
 	}
 	
 	public Character getTurn() {return turn;}
+	public void changeTurn() {
+		if (turn == characters.get(0)) turn = characters.get(1);
+		else turn = characters.get(0);
+	}
+	
 	
 	public static void main(String[] args)  {
 		Level l = new Level(11,11);
