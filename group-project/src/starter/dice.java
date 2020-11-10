@@ -16,7 +16,7 @@ public class dice {
 	
 
 	public int total() { //Roll the dice
-		return d_1 + d_2;
+		return getDice1()+getDice2();
 	}
 
 	public int getDice1() {
