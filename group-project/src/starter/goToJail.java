@@ -10,8 +10,8 @@ public class goToJail extends Items{
 
 	@Override
 	public void visit (Character Player) {
-		System.out.println("You have been sent to jail and your one turn is skipped.");
-		for(int i=0; i<1; i++) {
+		System.out.println("You have been sent to jail and your two turn is skipped.");
+		for(int i=0; i<=1; i++) {
 		Player.setMove(false);}
 	}
 }
