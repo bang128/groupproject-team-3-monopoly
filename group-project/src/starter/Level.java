@@ -179,7 +179,10 @@ public class Level {
 		this.nCols = nCols;
 	}
 	
-	public Character getTurn() {return turn;}
+	public Character getTurn() {
+		return turn;
+	}
+	
 	public void changeTurn() {
 		if (turn == characters.get(0)) turn = characters.get(1);
 		else turn = characters.get(0);
