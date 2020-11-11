@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 public class Items {
 	protected String name;
 
-	
 	public Items() {
 		name = "";
 	}

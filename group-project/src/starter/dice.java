@@ -16,7 +16,7 @@ public class dice {
 	
 
 	public int total() { //Roll the dice
-		return getDice1()+getDice2();
+		return d_1+d_2;
 	}
 
 	public int getDice1() {
@@ -30,13 +30,12 @@ public class dice {
 		return d_2;
 	}
 	
-	public void bothDicesSame() {
+	public void bothDicesSame(Character player) {
 		if (d_1==d_2) {
-			totalSame+=1;
-			gotToJail();
-			total(); //Roll again if you get a double
+			player.setSame(player.getSame() + 1);
 		}
 		else {
+			player.setSame(0);
 		}
 	}
 	

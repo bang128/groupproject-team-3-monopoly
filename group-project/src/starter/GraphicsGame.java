@@ -24,10 +24,10 @@ public class GraphicsGame extends GraphicsPane {
 	private MainApplication program;
 	private GImage dice1;
 	private GImage dice2;
+	private GImage dices_icon;
 	private ArrayList<String> dices;
 	private dice d;
-	private boolean click_dice1 = false;
-	private boolean click_dice2 = false;
+	private boolean click_dices = false;
 	int num1 = 0;
 	int num2 = 0;
 	private ArrayList<GImage> players;
@@ -40,11 +40,13 @@ public class GraphicsGame extends GraphicsPane {
 		normal_vertical = new GDimension(SpaceWidth() - 1, SPECIAL_HEIGHT - 1);
 		normal_horizontal = new GDimension(SPECIAL_WIDTH - 1, SpaceHeight() - 1);
 		board = level.getBoard();
-		d= new dice();
+		d = new dice();
 		dice1 = new GImage("dice.png", BOARD_WIDTH/2 - 125, BOARD_HEIGHT/2 - 50);
 		dice1.setSize(100,100);
 		dice2 = new GImage("dice.png", BOARD_WIDTH/2 + 25, BOARD_HEIGHT/2 - 50);
 		dice2.setSize(100,100);
+		dices_icon = new GImage("dices_icon.png", BOARD_WIDTH/2 - 100 ,BOARD_HEIGHT/2 - 50);
+		dices_icon.setSize(200, 130);
 		dices = new ArrayList<String>();
 		dices.add("dice.png");
 		dices.add("dice1.png");
@@ -89,8 +91,7 @@ public class GraphicsGame extends GraphicsPane {
 		
 	}
 	public void drawDices() {
-		program.add(dice1);
-		program.add(dice2);
+		program.add(dices_icon);
 	}
 
 	public void drawItems() {
@@ -123,7 +124,7 @@ public class GraphicsGame extends GraphicsPane {
 			pic_top.setSize(normal_vertical);
 			program.add(pic_top);
 			String name_bottom = board[level.getnRows() - 1][c].getName();
-			GImage pic_bottom = new GImage(name_bottom + "_v_b.png",SPECIAL_HEIGHT + (c-1)*SpaceHeight() + 1, BOARD_HEIGHT - SPECIAL_HEIGHT + 1);
+			GImage pic_bottom = new GImage(name_bottom + "_v_b.png",SPECIAL_WIDTH + (c-1)*SpaceWidth() + 1, BOARD_HEIGHT - SPECIAL_HEIGHT + 1);
 			pic_bottom.setSize(normal_vertical);
 			program.add(pic_bottom);	
 		}
@@ -138,45 +139,71 @@ public class GraphicsGame extends GraphicsPane {
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		//System.out.print(dices + "\n");
-		if(program.getElementAt(e.getX(), e.getY()) == dice1 && !click_dice1) {
-			System.out.println("DICE 1:");
-			click_dice1 = true;
+		if(program.getElementAt(e.getX(), e.getY()) == dices_icon && !click_dices) {
 			num1 = d.getDice1();
-			System.out.print(num1 + " " + num2 + "\n");
-			dice1.setImage(dices.get(num1));
-			System.out.print(dices.get(num1) + "\n");
-		}
-		if(program.getElementAt(e.getX(), e.getY()) == dice2 && !click_dice2) {
-			System.out.println("DICE 2:");
-			click_dice2 = true;
 			num2 = d.getDice2();
-			System.out.println(num1 + " " + num2);
+			dice1.setImage(dices.get(num1));
 			dice2.setImage(dices.get(num2));
-			System.out.print(dices.get(num2) + "\n");
-		}
-		
+			program.remove(dices_icon);
+			program.add(dice1);
+			program.add(dice2);
+			click_dices = true;
+		}	
 		
 	}
 	public void mouseReleased(MouseEvent e) {
-		if(click_dice1 && click_dice2) {
+		if(click_dices) {
 			program.pause(500);
-			System.out.print(level.getTurn().getPosition());
+			System.out.println(level.getTurn().getPosition());
 			level.moveNumSpaces(num1 + num2);
-			if (level.getTurn().getType() == level.characters.get(0).getType())
-				location(players.get(0), level.getTurn());
-			else location(players.get(1), level.getTurn());
-			System.out.print(level.getTurn().getPosition());
+			level.checkInJail();
 			level.getBoardAt(level.getTurn().getRow(), level.getTurn().getCol()).visit(level.getTurn());
-			System.out.println(level.characters.get(0).getMoney());
+			d.bothDicesSame(level.getTurn());
+			if (level.getTurn().getType() == level.characters.get(0).getType()) {
+				location(players.get(0), level.getTurn());
+				SetOwnedBuilding(players.get(0), level.getTurn());
+			}
+			else {
+				
+				location(players.get(1), level.getTurn());
+				SetOwnedBuilding(players.get(1), level.getTurn());
+			}
+			System.out.println(level.getTurn().getPosition());	
+			System.out.println(level.characters.get(0).getMoney() + " " + level.characters.get(0).getSame());
+			System.out.println(level.characters.get(1).getMoney() + " " + level.characters.get(1).getSame());
 			num1 = 0; num2 = 0;
-			program.pause(1000);
-			dice1.setImage("dice.png");
-			dice2.setImage("dice.png");
-			click_dice1 = false;
-			click_dice2 = false;
+			program.pause(500);
+			program.remove(dice1);
+			program.remove(dice2);
+			program.add(dices_icon);
 			level.changeTurn();
-			
+			click_dices = false;
+		}
+	}
+	
+	public void SetOwnedBuilding(GImage i, Character c) {
+		if (level.getBoardAt(c.getRow(), c.getCol()).getName() == "owned") {
+			program.remove(program.getElementAt(i.getX() - 5, i.getY() - 5));
+			GImage o = null;
+			if(c.getRow() == 0) {
+				o = new GImage("owned_v_t.png", SPECIAL_WIDTH + (c.getCol()-1)*SpaceWidth() + 1, 1);
+				o.setSize(normal_vertical);
+				program.add(o);
+			}
+			else if (c.getRow() == level.getnRows() - 1) { 
+				o = new GImage("owned_v_b.png", SPECIAL_WIDTH + (c.getCol()-1)*SpaceHeight() + 1, BOARD_WIDTH - SPECIAL_WIDTH + 1);
+				o.setSize(normal_vertical);
+			}
+			else if (c.getCol() == 0) {
+				o = new GImage("owned_h_l.png", 1, SPECIAL_HEIGHT + (c.getRow()-1)*SpaceHeight() + 1);
+				o.setSize(normal_horizontal);
+			}
+			else if (c.getCol() == level.getnCols() - 1) {
+				o = new GImage("owned_h_r.png", BOARD_WIDTH - SPECIAL_WIDTH + 1, SPECIAL_HEIGHT + (c.getRow()-1)*SpaceHeight() + 1);
+				o.setSize(normal_horizontal);
+			}
+			program.add(o);
+			o.sendToBack();
 		}
 	}
 

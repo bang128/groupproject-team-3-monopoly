@@ -49,7 +49,7 @@ public class Character{
 	}
 
 	public void setMoney(int money) {
-		this.money += money;
+		this.money = money;
 	}
 
 	public boolean isMove() {

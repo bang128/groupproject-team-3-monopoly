@@ -23,9 +23,9 @@ public class Building extends Items {
 	public void visit(Character player) {
 		if (owner == null) {
 			Object[] options = { "Yes", "No" };
-			boolean choice = handleOption(options, "Empty Property", "This is an empty property. Would you like to buy it? $500");
+			boolean choice = handleOption(options, "Empty Property", "This is an empty property. Would you like to buy it? $200");
 			if (choice) {
-				player.setMoney(player.getMoney() - 500);
+				player.setMoney(player.getMoney() - 200);
 				setOwner(player);
 				setName("owned");
 			}
