@@ -11,7 +11,8 @@ public class GraphicsGame extends GraphicsPane {
 	public static final int INVENTORY_HEIGHT = 200;
 	public static final int SPECIAL_HEIGHT = 90;
 	public static final int SPECIAL_WIDTH = 90;
-	public static final String lABEL_FONT = "Arial-Bold-22";
+	public static final String LABEL_FONT = "Arial-Bold-22";
+	public static final String TURN_FONT = "Arial-Bold-30";
 	public static final String EXIT_SIGN = "EXIT";
 	public static final String IMG_FILENAME_PATH = "images/";
 	public static final String IMG_EXTENSION = ".png";
@@ -31,6 +32,8 @@ public class GraphicsGame extends GraphicsPane {
 	int num1 = 0;
 	int num2 = 0;
 	private ArrayList<GImage> players;
+	private GLabel turn_label;
+	private ArrayList<GLabel> money_label;
 	
 	
 	public GraphicsGame(MainApplication app) {
@@ -58,7 +61,8 @@ public class GraphicsGame extends GraphicsPane {
 		players = new ArrayList<GImage>();
 		players.add(new GImage("player1.png", level.characters.get(0).getCol() * SpaceWidth() + SPECIAL_WIDTH - 15, level.characters.get(0).getRow() * SpaceHeight() + SPECIAL_HEIGHT - 40));
 		players.add(new GImage("player2.png", level.characters.get(1).getCol() * SpaceWidth() + SPECIAL_WIDTH - 15, level.characters.get(1).getRow() * SpaceHeight() + SPECIAL_HEIGHT));
-		
+		String s = level.getTurn().getType().toString();
+		turn_label = new GLabel(s.toUpperCase(), BOARD_WIDTH/2, BOARD_HEIGHT + INVENTORY_HEIGHT/2);
 	}
 	private double SpaceHeight() {
 		return (BOARD_HEIGHT - 2*SPECIAL_HEIGHT + 1)/(level.getnRows() - 2);
@@ -88,7 +92,14 @@ public class GraphicsGame extends GraphicsPane {
 		for (int i = 0; i < 2; i++) {program.add(players.get(i));}
 	}
 	public void drawInventories() {
-		
+		GLabel l = new GLabel("Turn:", BOARD_WIDTH/2, BOARD_HEIGHT + INVENTORY_HEIGHT/3);
+		l.setFont(LABEL_FONT);
+		l.setLocation(l.getX() - l.getWidth()/2 - 10, l.getY());
+		turn_label.setFont(TURN_FONT);
+		turn_label.setLocation(turn_label.getX() - turn_label.getWidth()/2 - 10, turn_label.getY() + turn_label.getHeight() - 10);
+		turn_label.setColor(Color.RED);
+		program.add(turn_label);
+		program.add(l);
 	}
 	public void drawDices() {
 		program.add(dices_icon);
@@ -134,6 +145,7 @@ public class GraphicsGame extends GraphicsPane {
 		drawItems();
 		drawDices();
 		drawCharacter();
+		drawInventories();
 	}
 
 	
@@ -157,26 +169,23 @@ public class GraphicsGame extends GraphicsPane {
 			System.out.println(level.getTurn().getPosition());
 			level.moveNumSpaces(num1 + num2);
 			level.checkInJail();
-			level.getBoardAt(level.getTurn().getRow(), level.getTurn().getCol()).visit(level.getTurn());
 			d.bothDicesSame(level.getTurn());
 			if (level.getTurn().getType() == level.characters.get(0).getType()) {
 				location(players.get(0), level.getTurn());
 				SetOwnedBuilding(players.get(0), level.getTurn());
 			}
 			else {
-				
 				location(players.get(1), level.getTurn());
 				SetOwnedBuilding(players.get(1), level.getTurn());
 			}
-			System.out.println(level.getTurn().getPosition());	
-			System.out.println(level.characters.get(0).getMoney() + " " + level.characters.get(0).getSame());
-			System.out.println(level.characters.get(1).getMoney() + " " + level.characters.get(1).getSame());
+			level.getBoardAt(level.getTurn().getRow(), level.getTurn().getCol()).visit(level.getTurn());
 			num1 = 0; num2 = 0;
 			program.pause(500);
 			program.remove(dice1);
 			program.remove(dice2);
 			program.add(dices_icon);
 			level.changeTurn();
+			//turn_label.setLabel(arg0);
 			click_dices = false;
 		}
 	}
