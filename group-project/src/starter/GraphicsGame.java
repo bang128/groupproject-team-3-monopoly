@@ -154,7 +154,11 @@ public class GraphicsGame extends GraphicsPane {
 	public void mouseReleased(MouseEvent e) {
 		if(click_dices) {
 			program.pause(500);
-			System.out.println(level.getTurn().getPosition());
+//			System.out.println(level.getTurn().getPosition());
+//			if(!level.checkInJail(level.getTurn())) {
+				level.moveNumSpaces(num1+num2);
+//			}
+			
 			level.moveNumSpaces(num1 + num2);
 			level.checkInJail();
 			level.getBoardAt(level.getTurn().getRow(), level.getTurn().getCol()).visit(level.getTurn());
@@ -168,9 +172,9 @@ public class GraphicsGame extends GraphicsPane {
 				location(players.get(1), level.getTurn());
 				SetOwnedBuilding(players.get(1), level.getTurn());
 			}
-			System.out.println(level.getTurn().getPosition());	
-			System.out.println(level.characters.get(0).getMoney() + " " + level.characters.get(0).getSame());
-			System.out.println(level.characters.get(1).getMoney() + " " + level.characters.get(1).getSame());
+//			System.out.println(level.getTurn().getPosition());	
+			System.out.println("Player 1: "+level.characters.get(0).getMoney() + " " + level.characters.get(0).getSame());
+			System.out.println("Player 2: "+level.characters.get(1).getMoney() + " " + level.characters.get(1).getSame()+"\n");
 			num1 = 0; num2 = 0;
 			program.pause(500);
 			program.remove(dice1);

@@ -189,10 +189,10 @@ public class Level {
 	}
 	public boolean checkInJail() {
 		if ((turn.getRow() == 0 && turn.getCol() == nCols -1) || turn.getSame() == 3) {
-			turn.setRow(0);
-			turn.setCol(nCols - 1);
+//			turn.setRow(0);
+//			turn.setCol(nCols - 1);
 			turn.setPosition(new Space(0, nCols -1));
-			turn.setMove(false);
+//			turn.setMove(false);
 			return true;
 		}
 		return false;

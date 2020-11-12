@@ -15,7 +15,7 @@ public class MainApplication extends GraphicsApplication {
 	}
 
 	public void run() {
-		System.out.println("Exit");
+		System.out.println("Welcome to Monopoly \n");
 		somePane = new SomePane(this);
 		menu = new MenuPane(this);
 		graphicsGame = new GraphicsGame(this);
