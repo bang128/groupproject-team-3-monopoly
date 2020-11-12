@@ -179,17 +179,20 @@ public class Level {
 		this.nCols = nCols;
 	}
 	
-	public Character getTurn() {return turn;}
+	public Character getTurn() {
+		return turn;
+	}
+	
 	public void changeTurn() {
 		if (turn == characters.get(0)) turn = characters.get(1);
 		else turn = characters.get(0);
 	}
 	public boolean checkInJail() {
 		if ((turn.getRow() == 0 && turn.getCol() == nCols -1) || turn.getSame() == 3) {
-			turn.setRow(0);
-			turn.setCol(nCols - 1);
+//			turn.setRow(0);
+//			turn.setCol(nCols - 1);
 			turn.setPosition(new Space(0, nCols -1));
-			turn.setMove(false);
+//			turn.setMove(false);
 			return true;
 		}
 		return false;
