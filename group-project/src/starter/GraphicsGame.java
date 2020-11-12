@@ -104,7 +104,7 @@ public class GraphicsGame extends GraphicsPane {
 	public void drawDices() {
 		program.add(dices_icon);
 	}
-
+	//comment
 	public void drawItems() {
 		GImage go_pic = new GImage("go.png", BOARD_WIDTH - SPECIAL_WIDTH + 1, BOARD_HEIGHT - SPECIAL_HEIGHT + 1);
 		go_pic.setSize(special);
