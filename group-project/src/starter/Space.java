@@ -24,8 +24,6 @@ public class Space {
 		return c;
 	}
 	
-	
-
 	public String toString() {
 		return "Space [r=" + r + ", c=" + c + "]";
 	}

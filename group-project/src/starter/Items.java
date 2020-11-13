@@ -24,9 +24,9 @@ public class Items {
 		}
 		return false;
 	}
-	public void visit(Character Player) {
+	public int visit(Character Player) {
+		return 0;
 		// TODO Auto-generated method stub
-		
 	}
 	
 	

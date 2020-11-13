@@ -8,13 +8,15 @@ public class CommunityChest extends Items {
 	}
 
 	@Override
-	public void visit (Character Player) {
+	public int visit (Character Player) {
 		Random r = new Random();
 		int r_1=r.nextInt(100);
 		Object[] options = { "Yes", "No" };
-		boolean choice = handleOption(options, "Community Chest", "This is change Community Chest. Would you like to get? $"+r_1);
+		boolean choice = handleOption(options, "Community Chest", "Your Community Chest card says you can $" + r_1 + ". Would you like to get it?");
 		if (choice) {
 			Player.setMoney(Player.getMoney() + r_1);	
+			return r_1;
 		}
+		return 0;
 	}
 }

@@ -2,7 +2,6 @@ package starter;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
-
 import acm.graphics.GImage;
 import acm.graphics.GLabel;
 import acm.graphics.GObject;
@@ -10,8 +9,6 @@ import acm.graphics.GObject;
 public class MenuPane extends GraphicsPane {
 	private MainApplication program; // you will use program to get access to
 									 // all of the GraphicsProgram calls
-	//private GButton play_button;
-	//private GButton quit_button;
 	private GLabel label;
 	private GImage start;
 	private GImage cont;

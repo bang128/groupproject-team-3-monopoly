@@ -13,7 +13,7 @@ public class GraphicsGame extends GraphicsPane {
 	public static final int SPECIAL_WIDTH = 90;
 	public static final int DICE_SIZE = 100;
 	public static final int[] MONEY_LABEL_X = {20, BOARD_WIDTH - 70};
-	public static final int MONEY_LABEL_Y = BOARD_HEIGHT + INVENTORY_HEIGHT/2 + 30;
+	public static final int MONEY_LABEL_Y = BOARD_HEIGHT + INVENTORY_HEIGHT/2 + 60;
 	public static final String LABEL_FONT = "Arial-Bold-22";
 	public static final String TURN_FONT = "Arial-Bold-30";
 	public static final String EXIT_SIGN = "EXIT";
@@ -37,20 +37,17 @@ public class GraphicsGame extends GraphicsPane {
 	private ArrayList<GImage> players = new ArrayList<GImage>();
 	private GLabel turn_label = new GLabel(level.getTurn().getType().toString().toUpperCase(), BOARD_WIDTH/2 -80, BOARD_HEIGHT + INVENTORY_HEIGHT/2 + 20);
 	private ArrayList<GLabel> money_label = new ArrayList<GLabel>();	
+	private String[] player_name = {"player1", "player2"};
+	private String[] dices_name = {"dice", "dice1", "dice2", "dice3", "dice4", "dice5", "dice6"};
 	
 	public GraphicsGame(MainApplication app) {
 		this.program = app;
-		dices.add("dice.png");
-		dices.add("dice1.png");
-		dices.add("dice2.png");
-		dices.add("dice3.png");
-		dices.add("dice4.png");
-		dices.add("dice5.png");
-		dices.add("dice6.png");
-		players.add(new GImage("player1.png", level.characters.get(0).getCol() * SpaceWidth() + SPECIAL_WIDTH - 15, level.characters.get(0).getRow() * SpaceHeight() + SPECIAL_HEIGHT - 40));
-		players.add(new GImage("player2.png", level.characters.get(1).getCol() * SpaceWidth() + SPECIAL_WIDTH - 15, level.characters.get(1).getRow() * SpaceHeight() + SPECIAL_HEIGHT));
-		money_label.add(new GLabel(""+level.characters.get(0).getMoney(), MONEY_LABEL_X[0], MONEY_LABEL_Y));
-		money_label.add(new GLabel(""+level.characters.get(0).getMoney(), MONEY_LABEL_X[1], MONEY_LABEL_Y));	
+		for (int i = 0; i < 7; i++)
+			dices.add(dices_name[i] + IMG_EXTENSION);
+		for (int i = 0; i < 2; i++) {
+			players.add(new GImage(player_name[i] + IMG_EXTENSION, level.characters.get(i).getCol() * SpaceWidth() + SPECIAL_WIDTH - 15, level.characters.get(i).getRow() * SpaceHeight() + SPECIAL_HEIGHT + 40*(i-1)));
+			money_label.add(new GLabel(""+level.characters.get(i).getMoney(), MONEY_LABEL_X[i], MONEY_LABEL_Y));
+		}
 	}
 	private double SpaceHeight() {
 		return (BOARD_HEIGHT - 2*SPECIAL_HEIGHT + 1)/(level.getnRows() - 2);
@@ -90,9 +87,11 @@ public class GraphicsGame extends GraphicsPane {
 		for(int i = 0; i < 2; i++) {
 			GLabel p = new GLabel(level.characters.get(i).getType().toString().toUpperCase(), MONEY_LABEL_X[i] - i*50, MONEY_LABEL_Y - 50);
 			p.setFont(LABEL_FONT);
-			program.add(p);
+			GImage image = new GImage(player_name[i] + IMG_EXTENSION, MONEY_LABEL_X[i] + i*15, MONEY_LABEL_Y - 125);
 			money_label.get(i).setFont(LABEL_FONT);
 			program.add(money_label.get(i));
+			program.add(p);
+			program.add(image);
 		}
 		program.add(MainApplication.returnButton);
 	}
@@ -166,13 +165,9 @@ public class GraphicsGame extends GraphicsPane {
 	public void mouseReleased(MouseEvent e) {
 		if(click_dices) {
 			program.pause(500);
-//			System.out.println(level.getTurn().getPosition());
-//			if(!level.checkInJail(level.getTurn())) {
-//			}
 			level.moveNumSpaces(num1 + num2);
 			level.checkInJail();
 			d.bothDicesSame(level.getTurn());
-			level.getBoardAt(level.getTurn().getRow(), level.getTurn().getCol()).visit(level.getTurn());
 			if (level.getTurn().getType() == level.characters.get(0).getType()) moveImage(0);
 			else moveImage(1);
 			System.out.println("Player 1: "+level.characters.get(0).getMoney() + " " + level.characters.get(0).getSame());
@@ -197,6 +192,8 @@ public class GraphicsGame extends GraphicsPane {
 	}
 	public void moveImage(int i) {
 		location(players.get(i), level.getTurn());
+		int m = level.getBoardAt(level.getTurn().getRow(), level.getTurn().getCol()).visit(level.getTurn());
+		level.setBank(level.getBank() + m);
 		SetOwnedBuilding(players.get(i), level.getTurn());
 		money_label.get(i).setLabel("" + level.characters.get(i).getMoney());
 	}
@@ -252,7 +249,6 @@ public class GraphicsGame extends GraphicsPane {
 	public void showContents() {
 		// TODO Auto-generated method stub
 		drawAllBoard();
-		//program.addMouseListeners();
 	}
 	@Override
 	public void hideContents() {

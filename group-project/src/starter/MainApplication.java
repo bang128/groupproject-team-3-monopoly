@@ -11,6 +11,7 @@ public class MainApplication extends GraphicsApplication {
 	private SomePane somePane;
 	private MenuPane menu;
 	private GraphicsGame graphicsGame;
+	private EndPane endPane;
 	private int count;
 	
 	public static boolean continue_game = false;
@@ -45,7 +46,10 @@ public class MainApplication extends GraphicsApplication {
 	public void switchToGraphicsGame() {
 		switchToScreen(graphicsGame);
 	}
-
+	
+	public void switchToEnd() {
+		switchToScreen(endPane);
+	}
 //	private void playRandomSound() {
 //		AudioPlayer audio = AudioPlayer.getInstance();
 //		audio.playSound(MUSIC_FOLDER, SOUND_FILES[count % SOUND_FILES.length]);
