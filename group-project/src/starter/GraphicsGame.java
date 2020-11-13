@@ -35,10 +35,8 @@ public class GraphicsGame extends GraphicsPane {
 	int num1 = 0;
 	int num2 = 0;
 	private ArrayList<GImage> players = new ArrayList<GImage>();
-	private GLabel turn_label = new GLabel(level.getTurn().getType().toString().toUpperCase(), BOARD_WIDTH/2, BOARD_HEIGHT + INVENTORY_HEIGHT/2);;
-	private ArrayList<GLabel> money_label = new ArrayList<GLabel>();
-	
-		
+	private GLabel turn_label = new GLabel(level.getTurn().getType().toString().toUpperCase(), BOARD_WIDTH/2 -80, BOARD_HEIGHT + INVENTORY_HEIGHT/2 + 20);
+	private ArrayList<GLabel> money_label = new ArrayList<GLabel>();	
 	
 	public GraphicsGame(MainApplication app) {
 		this.program = app;
@@ -86,7 +84,6 @@ public class GraphicsGame extends GraphicsPane {
 		l.setFont(LABEL_FONT);
 		l.setLocation(l.getX() - l.getWidth()/2 - 10, l.getY());
 		turn_label.setFont(TURN_FONT);
-		turn_label.setLocation(turn_label.getX() - turn_label.getWidth()/2 - 10, turn_label.getY() + turn_label.getHeight() - 10);
 		turn_label.setColor(new Color(255, 26, 26));
 		program.add(turn_label);
 		program.add(l);
@@ -191,11 +188,13 @@ public class GraphicsGame extends GraphicsPane {
 		}
 	}
 	
-	/*@Override 
+	@Override 
 	public void mouseClicked(MouseEvent e) {
-		if(program.getElementAt(e.getX(), e.getY()) == MainApplication.returnButton) program.switchToMenu();
-	}*/
-	
+		if(program.getElementAt(e.getX(), e.getY()) == MainApplication.returnButton) { 
+			MainApplication.continue_game = true;
+			program.switchToMenu();
+		}
+	}
 	public void moveImage(int i) {
 		location(players.get(i), level.getTurn());
 		SetOwnedBuilding(players.get(i), level.getTurn());

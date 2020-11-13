@@ -13,6 +13,8 @@ public class MainApplication extends GraphicsApplication {
 	private GraphicsGame graphicsGame;
 	private int count;
 	
+	public static boolean continue_game = false;
+	
 	public static GButton returnButton = new GButton("Return to Menu", WINDOW_WIDTH/2 - 65, WINDOW_HEIGHT - 50, 100,
 			40, new Color(102, 153, 255));
 

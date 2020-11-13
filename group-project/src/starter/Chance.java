@@ -19,15 +19,21 @@ public class Chance extends Items {
 	public void loseMoney(Character Player) {
 		 Random r = new Random();
 		 int r_2 = r.nextInt(100);
-		 System.out.println("This is change chance card. you lost $"+r_2);
-		 Player.setMoney(Player.getMoney() - r_2);	
+		 Object[] options = { "OK" };
+			boolean choice = handleOption(options, "Chance", "Oops! Your chance card says that you lose $" + r_2);
+			if (choice) {
+				Player.setMoney(Player.getMoney() - r_2);
+			}
 	}
 
 	public void winMoney(Character Player) {
 		Random r = new Random();
 		int r_1=r.nextInt(100) ;
-		System.out.println("This is change chance card. you won $"+r_1);
-		Player.setMoney(Player.getMoney() + r_1);	
+		 Object[] options = { "OK" };
+			boolean choice = handleOption(options, "Chance", "Wonderful! Your chance card says that you win $" + r_1);
+			if (choice) {
+				Player.setMoney(Player.getMoney() + r_1);
+			}
 	}
 
 }
