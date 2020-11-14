@@ -23,7 +23,7 @@ public class Chance extends Items {
 			boolean choice = handleOption(options, "Chance", "Oops! Your chance card says that you lose $" + r_2);
 			if (choice)
 				Player.setMoney(Player.getMoney() - r_2);
-			return (-1)*r_2;
+			return r_2;
 	}
 
 	public int winMoney(Character Player) {
@@ -33,7 +33,7 @@ public class Chance extends Items {
 			boolean choice = handleOption(options, "Chance", "Wonderful! Your chance card says that you win $" + r_1);
 			if (choice)
 				Player.setMoney(Player.getMoney() + r_1);
-			return r_1;
+			return -r_1;
 	}
 
 }

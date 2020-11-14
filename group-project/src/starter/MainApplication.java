@@ -1,6 +1,9 @@
 package starter;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+
+import acm.graphics.GImage;
 
 public class MainApplication extends GraphicsApplication {
 	public static final int WINDOW_WIDTH = 700;
@@ -15,9 +18,10 @@ public class MainApplication extends GraphicsApplication {
 	private int count;
 	
 	public static boolean continue_game = false;
-	
-	public static GButton returnButton = new GButton("Return to Menu", WINDOW_WIDTH/2 - 65, WINDOW_HEIGHT - 50, 100,
-			40, new Color(102, 153, 255));
+	public static GImage sound_on = new GImage("sound_on.png", 10, WINDOW_HEIGHT - 40);
+	public static GImage sound_off = new GImage("sound_off.png", 10, WINDOW_HEIGHT - 40);
+	public static GButton returnButton = new GButton("Return to Menu", WINDOW_WIDTH - 100, WINDOW_HEIGHT - 40, 90,
+			30, new Color(102, 153, 255));
 
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -36,19 +40,34 @@ public class MainApplication extends GraphicsApplication {
 		//playRandomSound();
 		count++;
 		switchToScreen(menu);
+		add(sound_on);
 	}
 
 	public void switchToSome() {
 		//playRandomSound();
 		switchToScreen(somePane);
+		addSomeButtons();
 	}
 	
 	public void switchToGraphicsGame() {
 		switchToScreen(graphicsGame);
+		addSomeButtons();
 	}
 	
 	public void switchToEnd() {
 		switchToScreen(endPane);
+		addSomeButtons();
+	}
+	
+	public void addSomeButtons() {
+		add(returnButton);
+		add(sound_on);
+	}
+	
+	@Override 
+	public void mouseClicked(MouseEvent e) {
+		if(getElementAt(e.getX(), e.getY()) == MainApplication.returnButton) 
+			switchToMenu();
 	}
 //	private void playRandomSound() {
 //		AudioPlayer audio = AudioPlayer.getInstance();

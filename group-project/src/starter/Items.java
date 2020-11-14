@@ -5,9 +5,18 @@ import javax.swing.JOptionPane;
 
 public class Items {
 	protected String name;
+	protected Character owner;
 
 	public Items() {
 		name = "";
+		owner = null;
+	}
+	public void setOwner(Character o) {
+		owner = o;
+	}
+	
+	public Character getOwner() { 
+		return owner;
 	}
 	public void setName(String n){
 		name = n;

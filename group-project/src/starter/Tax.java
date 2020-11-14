@@ -14,6 +14,6 @@ public class Tax extends Items {
 		if (choice) {
 			Player.setMoney(Player.getMoney() - 100);
 		}
-		return -100;
+		return 100;
 	}
 }

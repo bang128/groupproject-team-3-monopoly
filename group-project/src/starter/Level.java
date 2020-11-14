@@ -198,7 +198,7 @@ public class Level {
 		return false;
 	}
 	
-	
+	public void resetGame() {}
 	public static void main(String[] args)  {
 		Level l = new Level(11,11);
 		System.out.println(l.getTurn().getPosition());

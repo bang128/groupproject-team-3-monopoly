@@ -12,14 +12,6 @@ public class Building extends Items {
 		owner = o;
 	}
 	
-	public void setOwner(Character o) {
-		owner = o;
-		}
-	
-	public Character getOwner() { 
-		return owner;
-		}
-	
 	@Override
 	public int visit(Character player) {
 		if (owner == null) {
@@ -29,7 +21,7 @@ public class Building extends Items {
 				player.setMoney(player.getMoney() - 200);
 				setOwner(player);
 				setName("owned");
-				return -200;
+				return 200;
 			}	
 		}
 		else if (owner != player && owner != null) {
@@ -37,7 +29,7 @@ public class Building extends Items {
 			boolean choice = handleOption(options, "Building", "You have to pay $50 for the owner of this building.");
 			if (choice) {
 				player.setMoney(player.getMoney() - 50);
-				return -50;
+				return 50;
 			}
 		}
 		return 0;
