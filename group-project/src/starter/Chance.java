@@ -10,10 +10,13 @@ public class Chance extends Items {
 
 	@Override
 	public int visit (Character Player) {
-		Random r = new Random();
-		int r_2 = r.nextInt();
-		if (r_2 % 2 == 0) return loseMoney(Player);
-		else return winMoney(Player);
+		if(Player.isMove()) {
+			Random r = new Random();
+			int r_2 = r.nextInt();
+			if (r_2 % 2 == 0) return loseMoney(Player);
+			else return winMoney(Player);
+		}
+		return 0;
 		
 	}
 	public int loseMoney(Character Player) {

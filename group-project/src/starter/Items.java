@@ -6,10 +6,12 @@ import javax.swing.JOptionPane;
 public class Items {
 	protected String name;
 	protected Character owner;
+	protected boolean SentFromGoToJail;
 
 	public Items() {
 		name = "";
 		owner = null;
+		SentFromGoToJail = false;
 	}
 	public void setOwner(Character o) {
 		owner = o;
@@ -23,6 +25,12 @@ public class Items {
 	}
 	public String getName() {
 		return name;
+	}
+	public void setSentFromGoToJail(boolean s) {
+		SentFromGoToJail = s;
+	}
+	public boolean getSentFromGoToJail() {
+		return SentFromGoToJail;
 	}
 	
 	public boolean handleOption(Object[] options, String popup_name, String message) {

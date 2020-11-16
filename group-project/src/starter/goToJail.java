@@ -3,17 +3,24 @@ import java.util.*;
 
 
 public class goToJail extends Items{
-	Level l;
 	public goToJail() {
 		name = "goToJail";
 	}
 
-	/*@Override
+	@Override
 	public int visit (Character Player) {
-		System.out.println("You have been sent to jail and your two turn is skipped.");
-		Player.setMove(false);
-		Player.setRow(0);
-		Player.setCol(l.);
-		Player.setPosition(new Space(0, l.getnCols() -1));
-	}*/
+		if(Player.isMove()) {
+			Object[] options = {"Yes", "No"};
+			boolean choice = handleOption(options, "Go to Jail", "You are being sent to Jail. Would you like to pay $100 to be released?");
+			if (choice) {
+				Player.setMoney(Player.getMoney() - 100);
+				return 100;
+			}
+			else {
+				Player.setMove(false);
+				return 0;
+			}
+		}
+		return 0;
+	}
 }

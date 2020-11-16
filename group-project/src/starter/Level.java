@@ -11,15 +11,17 @@ public class Level {
 		nRows = nR;
 		nCols = nC;
 		board = new Items[nR][nC];
-		bank = 10000;
+		bank = 5000;
 		characters = new ArrayList<Character>();
 		setUp();
+		ChooseFirstTurn();
+	}
+	public void ChooseFirstTurn() {
 		Random generator = new Random();
 		int r = generator.nextInt();
 		if (r % 2 == 0) turn = characters.get(0);
 		else turn = characters.get(1);
 	}
-	
 	public void setUp() {
 		for (int r = 1; r < nRows - 1; r++) {
 			board[r][0] = new Building();
@@ -33,8 +35,8 @@ public class Level {
 		}
 		
 		board[0][0] = new Items();
-		board[0][nCols - 1] = new Items();
-		board[nRows - 1][0] = new Items();
+		board[0][nCols - 1] = new goToJail();
+		board[nRows - 1][0] = new Jail();
 		board[nRows - 1][nCols - 1] = new Items();
 		
 		int row, col;
@@ -80,75 +82,67 @@ public class Level {
 	public Items getBoardAt(int r, int c) {return board[r][c];}
 	
 	public void moveNumSpaces(int numSpaces) {
-		Space pre = null;
-		//System.out.println("num: " + numSpaces);
-		if (turn.getRow() == nRows - 1 && turn.getCol() == nCols - 1) {
-			pre = turn.ifIWereToMove(0, (-1)*numSpaces);
-			//System.out.println("case: 1");
-		}
-		else if (turn.getRow() == nRows - 1 && turn.getCol() == 0) {
-			pre = turn.ifIWereToMove((-1)*numSpaces, 0);
-			//System.out.println("case: 2");
-		}
-		else if (turn.getRow() == 0 && turn.getCol() == 0) {
-			pre = turn.ifIWereToMove(0, numSpaces);
-			//System.out.println("case: 3");
-		}
-		else if (turn.getRow() == 0 && turn.getCol() == nCols - 1) {
-			pre = turn.ifIWereToMove(numSpaces, 0);
-			//System.out.println("case: 4");
-		}
-		else if (turn.getRow() == nRows - 1) {
-			pre = turn.ifIWereToMove(0, (-1)*numSpaces);
-			//System.out.println("case: 5");
-		}
-		else if (turn.getCol() == 0) {
-			pre = turn.ifIWereToMove((-1)*numSpaces, 0);
-			//System.out.println("case: 6");
-		}
-		else if (turn.getRow() == 0) {
-			pre = turn.ifIWereToMove(0, numSpaces);
-			//System.out.println("case: 7");
-		}
-		else if (turn.getCol() == nCols - 1) {
-			pre = turn.ifIWereToMove(numSpaces, 0);
-			//System.out.println("case: 8");
-		}
-		
-		//System.out.print(turn.getPosition()+ " " + pre + "\n");
-		
-		int numMove;
-		if(pre.getRow() == nRows - 1) {
-			if(pre.getCol() < 0) {
-				numMove = turn.getCol();
-				turn.move(0, (-1)*numMove);
-				moveNumSpaces(numSpaces - numMove);
+		if(getTurn().isMove()) {
+			Space pre = null;
+			if (turn.getRow() == nRows - 1 && turn.getCol() == nCols - 1) {
+				pre = turn.ifIWereToMove(0, (-1)*numSpaces);
 			}
-			else turn.move(0, (-1)*numSpaces);
-		}
-		else if(pre.getCol() == 0) {
-			if (pre.getRow() < 0) {
-				numMove = turn.getRow();
-				turn.move((-1)*numMove,0);
-				moveNumSpaces(numSpaces - numMove);
+			else if (turn.getRow() == nRows - 1 && turn.getCol() == 0) {
+				pre = turn.ifIWereToMove((-1)*numSpaces, 0);
 			}
-			else turn.move((-1)*numSpaces,0);
-		}
-		else if (pre.getRow() == 0) {
-			if(pre.getCol() > nCols - 1) {
-				numMove = nCols - turn.getCol() - 1;
-				turn.move(0, numMove);
-				moveNumSpaces(numSpaces - numMove);
+			else if (turn.getRow() == 0 && turn.getCol() == 0) {
+				pre = turn.ifIWereToMove(0, numSpaces);
 			}
-			else turn.move(0, numSpaces);
-		}
-		else if (pre.getCol() == nCols - 1) {
-			if(pre.getRow() > nRows - 1) {
-				numMove = nRows - turn.getRow() - 1;
-				turn.move(numMove, 0);
-				moveNumSpaces(numSpaces - numMove);
+			else if (turn.getRow() == 0 && turn.getCol() == nCols - 1) {
+				pre = turn.ifIWereToMove(numSpaces, 0);
 			}
-			else turn.move(numSpaces, 0);
+			else if (turn.getRow() == nRows - 1) {
+				pre = turn.ifIWereToMove(0, (-1)*numSpaces);
+			}
+			else if (turn.getCol() == 0) {
+				pre = turn.ifIWereToMove((-1)*numSpaces, 0);
+			}
+			else if (turn.getRow() == 0) {
+				pre = turn.ifIWereToMove(0, numSpaces);
+			}
+			else if (turn.getCol() == nCols - 1) {
+				pre = turn.ifIWereToMove(numSpaces, 0);
+			}
+			
+			
+			int numMove;
+			if(pre.getRow() == nRows - 1) {
+				if(pre.getCol() < 0) {
+					numMove = turn.getCol();
+					turn.move(0, (-1)*numMove);
+					moveNumSpaces(numSpaces - numMove);
+				}
+				else turn.move(0, (-1)*numSpaces);
+			}
+			else if(pre.getCol() == 0) {
+				if (pre.getRow() < 0) {
+					numMove = turn.getRow();
+					turn.move((-1)*numMove,0);
+					moveNumSpaces(numSpaces - numMove);
+				}
+				else turn.move((-1)*numSpaces,0);
+			}
+			else if (pre.getRow() == 0) {
+				if(pre.getCol() > nCols - 1) {
+					numMove = nCols - turn.getCol() - 1;
+					turn.move(0, numMove);
+					moveNumSpaces(numSpaces - numMove);
+				}
+				else turn.move(0, numSpaces);
+			}
+			else if (pre.getCol() == nCols - 1) {
+				if(pre.getRow() > nRows - 1) {
+					numMove = nRows - turn.getRow() - 1;
+					turn.move(numMove, 0);
+					moveNumSpaces(numSpaces - numMove);
+				}
+				else turn.move(numSpaces, 0);
+			}
 		}
 	}
 	public Items[][] getBoard() {
@@ -187,18 +181,33 @@ public class Level {
 		if (turn == characters.get(0)) turn = characters.get(1);
 		else turn = characters.get(0);
 	}
-	public boolean checkInJail() {
-		if ((turn.getRow() == 0 && turn.getCol() == nCols -1) || turn.getSame() == 3) {
-//			turn.setRow(0);
-//			turn.setCol(nCols - 1);
-			turn.setPosition(new Space(0, nCols -1));
-//			turn.setMove(false);
+	public boolean sendToJail() {
+		if ((getBoardAt(turn.getRow(), turn.getCol()).getName() == "goToJail" && !turn.isMove()) || turn.getSame() == 3) {
+			turn.setRow(nRows -1);
+			turn.setCol(0);
+			turn.setPosition(new Space(turn.getRow(), turn.getCol()));
+			turn.setMove(false);
 			return true;
 		}
 		return false;
 	}
 	
-	public void resetGame() {}
+	public boolean checkEnd() {
+		for(Character c: characters) {
+			if (c.getMoney() < 0)
+				return true;
+		}
+		if(getBank() < 0) return true;
+		return false;
+	}
+	
+	public void resetGame() {
+		for (Character c: characters) {
+			characters.remove(c);
+		}
+		setUp();
+		ChooseFirstTurn();
+	}
 	public static void main(String[] args)  {
 		Level l = new Level(11,11);
 		System.out.println(l.getTurn().getPosition());

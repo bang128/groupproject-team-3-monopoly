@@ -32,6 +32,7 @@ public class MainApplication extends GraphicsApplication {
 		somePane = new SomePane(this);
 		menu = new MenuPane(this);
 		graphicsGame = new GraphicsGame(this);
+		endPane = new EndPane(this);
 		returnButton.setColor(new Color(0, 26, 77));
 		switchToMenu();
 	}

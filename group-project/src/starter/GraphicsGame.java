@@ -168,7 +168,6 @@ public class GraphicsGame extends GraphicsPane {
 		if(click_dices) {
 			program.pause(500);
 			level.moveNumSpaces(num1 + num2);
-			level.checkInJail();
 			d.bothDicesSame(level.getTurn());
 			if (level.getTurn().getType() == level.characters.get(0).getType()) moveImage(0);
 			else moveImage(1);
@@ -179,10 +178,17 @@ public class GraphicsGame extends GraphicsPane {
 			program.remove(dice1);
 			program.remove(dice2);
 			program.add(dices_icon);
-			level.changeTurn();
-			turn_label.setLabel(level.getTurn().getType().toString().toUpperCase());
-			click_dices = false;
+			if(level.checkEnd()) {
+				level.resetGame();
+				program.switchToEnd();
+			}
+			else {
+				level.changeTurn();
+				turn_label.setLabel(level.getTurn().getType().toString().toUpperCase());
+				click_dices = false;
+			}
 		}
+		
 	}
 	
 	@Override 
@@ -194,6 +200,7 @@ public class GraphicsGame extends GraphicsPane {
 		location(players.get(i), level.getTurn());
 		Items item = level.getBoardAt(level.getTurn().getRow(), level.getTurn().getCol());
 		int m = item.visit(level.getTurn());
+		if (level.sendToJail()) location(players.get(i), level.getTurn());
 		if(item.getName() == "owned" && item.getOwner() != level.getTurn()) {
 			switch (i) {
 			case 0:
