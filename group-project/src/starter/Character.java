@@ -71,7 +71,7 @@ public class Character{
 	@Override
 	public String toString() {
 		return "Character [type=" + type + ", position=" + position + ", row=" + row + ", col=" + col + ", money="
-				+ money + ", move=" + move + "]";
+				+ money + ", move=" + move + ", same=" + same + "]";
 	}
 	
 	public Space ifIWereToMove(int numRows, int numCols) {
@@ -83,8 +83,8 @@ public class Character{
 	
 	public void move(int numRows, int numCols) {
 		if(move) {
-			row = row + numRows;
-			col = col + numCols;
+			setRow(row + numRows);
+			setCol(col + numCols);
 			setPosition(new Space(row, col));
 		}
 	}

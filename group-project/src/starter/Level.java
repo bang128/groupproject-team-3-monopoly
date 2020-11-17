@@ -109,22 +109,14 @@ public class Level {
 				pre = turn.ifIWereToMove(numSpaces, 0);
 			}
 			
-			
 			int numMove;
-			if(pre.getRow() == nRows - 1) {
-				if(pre.getCol() < 0) {
-					numMove = turn.getCol();
-					turn.move(0, (-1)*numMove);
-					moveNumSpaces(numSpaces - numMove);
-				}
-				else turn.move(0, (-1)*numSpaces);
-			}
-			else if(pre.getCol() == 0) {
+			if(pre.getCol() == 0) {
 				if (pre.getRow() < 0) {
 					numMove = turn.getRow();
 					turn.move((-1)*numMove,0);
 					moveNumSpaces(numSpaces - numMove);
 				}
+				else if (pre.getRow() == nRows - 1) turn.move(0,(-1)*numSpaces);
 				else turn.move((-1)*numSpaces,0);
 			}
 			else if (pre.getRow() == 0) {
@@ -143,7 +135,16 @@ public class Level {
 				}
 				else turn.move(numSpaces, 0);
 			}
+			else if(pre.getRow() == nRows - 1) {
+				if(pre.getCol() < 0) {
+					numMove = turn.getCol();
+					turn.move(0, (-1)*numMove);
+					moveNumSpaces(numSpaces - numMove);
+				}
+				else turn.move(0, (-1)*numSpaces);
+			}
 		}
+		//System.out.println(turn);
 	}
 	public Items[][] getBoard() {
 		return board;
@@ -222,7 +223,22 @@ public class Level {
 		System.out.println("Move 7: " + l.getTurn().getPosition());
 		
 		l.moveNumSpaces(9);
-		System.out.print("Move 9: " + l.getTurn().getPosition());
+		System.out.println("Move 9: " + l.getTurn().getPosition());
+		
+		l.moveNumSpaces(9);
+		System.out.println("Move 9: " + l.getTurn().getPosition());
+		
+		l.moveNumSpaces(10);
+		System.out.println("Move 10: " + l.getTurn().getPosition());
+		
+		l.moveNumSpaces(3);
+		System.out.println("Move 3: " + l.getTurn().getPosition());
+		
+		l.moveNumSpaces(7);
+		System.out.println("Move 7: " + l.getTurn().getPosition());
+		
+		l.moveNumSpaces(10);
+		System.out.println("Move 10: " + l.getTurn().getPosition());
 	}
 
 }
