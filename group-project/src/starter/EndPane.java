@@ -9,8 +9,8 @@ public class EndPane extends GraphicsPane {
 	public EndPane(MainApplication app) {
 		super();
 		program = app;
-		program.continue_game = false;
-		l = new GLabel("GAME OVER", program.WINDOW_WIDTH/2, program.WINDOW_HEIGHT/2);
+		MainApplication.continue_game = false;
+		l = new GLabel("GAME OVER", MainApplication.WINDOW_WIDTH/2, MainApplication.WINDOW_HEIGHT/2);
 	}
 	@Override
 	public void showContents() {
