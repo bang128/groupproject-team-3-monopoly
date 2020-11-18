@@ -5,13 +5,17 @@ import acm.graphics.*;
 public class EndPane extends GraphicsPane {
 	private MainApplication program;
 	private GLabel l;
+	private GImage I;
 	
 	public EndPane(MainApplication app) {
 		super();
 		program = app;
 		MainApplication.continue_game = false;
-		l = new GLabel("GAME OVER", MainApplication.WINDOW_WIDTH/2, MainApplication.WINDOW_HEIGHT/2);
+		l = new GLabel("GAME OVER", 400, 400);	
+		l.setFont("Arial-24");
 	}
+	
+
 	@Override
 	public void showContents() {
 		// TODO Auto-generated method stub

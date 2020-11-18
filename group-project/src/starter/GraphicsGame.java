@@ -74,9 +74,11 @@ public class GraphicsGame extends GraphicsPane {
 			program.add(new GLine(SPECIAL_WIDTH + c*SpaceWidth(),BOARD_HEIGHT - SPECIAL_HEIGHT, SPECIAL_WIDTH + c*SpaceWidth(), BOARD_HEIGHT));
 		}
 	}
+	
 	public void drawCharacter() {
 		for (int i = 0; i < 2; i++) {program.add(players.get(i));}
 	}
+	
 	public void drawInventories() {
 		GLabel l = new GLabel("Turn:", BOARD_WIDTH/2, BOARD_HEIGHT + INVENTORY_HEIGHT/3);
 		l.setFont(LABEL_FONT);
@@ -97,6 +99,7 @@ public class GraphicsGame extends GraphicsPane {
 		bank_money.setFont(LABEL_FONT);
 		program.add(bank_money);
 	}
+	
 	public void drawDices() {
 		dice1.setSize(DICE_SIZE, DICE_SIZE);
 		dice2.setSize(DICE_SIZE, DICE_SIZE);
@@ -267,6 +270,7 @@ public class GraphicsGame extends GraphicsPane {
 		}
 		i.setLocation(x, y);
 	}
+	
 	@Override
 	public void showContents() {
 		// TODO Auto-generated method stub
