@@ -225,24 +225,25 @@ public class GraphicsGame extends GraphicsPane {
 	}
 	
 	public void SetOwnedBuilding(GImage i, Character c) {
-		if (level.getBoardAt(c.getRow(), c.getCol()).getName() == "owned") {
+		String name = level.getBoardAt(c.getRow(), c.getCol()).getName();
+		if (level.getBoardAt(c.getRow(), c.getCol()).getOwner() != null) {
 			program.remove(program.getElementAt(i.getX() - 5, i.getY() - 5));
 			GImage o = null;
 			if(c.getRow() == 0) {
-				o = new GImage("owned_v_t.png", SPECIAL_WIDTH + (c.getCol()-1)*SpaceWidth() + 1, 1);
+				o = new GImage(name + "_v_t.png", SPECIAL_WIDTH + (c.getCol()-1)*SpaceWidth() + 1, 1);
 				o.setSize(normal_vertical);
 				program.add(o);
 			}
 			else if (c.getRow() == level.getnRows() - 1) { 
-				o = new GImage("owned_v_b.png", SPECIAL_WIDTH + (c.getCol()-1)*SpaceHeight() + 1, BOARD_WIDTH - SPECIAL_WIDTH + 1);
+				o = new GImage(name + "_v_b.png", SPECIAL_WIDTH + (c.getCol()-1)*SpaceHeight() + 1, BOARD_WIDTH - SPECIAL_WIDTH + 1);
 				o.setSize(normal_vertical);
 			}
 			else if (c.getCol() == 0) {
-				o = new GImage("owned_h_l.png", 1, SPECIAL_HEIGHT + (c.getRow()-1)*SpaceHeight() + 1);
+				o = new GImage(name + "_h_l.png", 1, SPECIAL_HEIGHT + (c.getRow()-1)*SpaceHeight() + 1);
 				o.setSize(normal_horizontal);
 			}
 			else if (c.getCol() == level.getnCols() - 1) {
-				o = new GImage("owned_h_r.png", BOARD_WIDTH - SPECIAL_WIDTH + 1, SPECIAL_HEIGHT + (c.getRow()-1)*SpaceHeight() + 1);
+				o = new GImage(name + "_h_r.png", BOARD_WIDTH - SPECIAL_WIDTH + 1, SPECIAL_HEIGHT + (c.getRow()-1)*SpaceHeight() + 1);
 				o.setSize(normal_horizontal);
 			}
 			program.add(o);

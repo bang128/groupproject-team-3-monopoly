@@ -21,7 +21,7 @@ public class Building extends Items {
 				if (choice) {
 					player.setMoney(player.getMoney() - 200);
 					setOwner(player);
-					setName("owned");
+					setName(player.getType().toString() + "_owned");
 					//System.out.println("Owner: " + getOwner());
 					return 200;
 				}
