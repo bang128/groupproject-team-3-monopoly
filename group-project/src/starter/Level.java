@@ -11,7 +11,7 @@ public class Level {
 		nRows = nR;
 		nCols = nC;
 		board = new Items[nR][nC];
-		bank = 5000;
+		bank = 2000;
 		characters = new ArrayList<Character>();
 		setUp();
 		ChooseFirstTurn();
@@ -74,8 +74,8 @@ public class Level {
 			board[nRows - 1][col] = new Tax();
 		}
 		
-		characters.add(new Character(CharacterType.PLAYER1, nRows -1, nCols - 1, 2000, true, 0));
-		characters.add(new Character(CharacterType.PLAYER2, nRows -1, nCols - 1, 2000, true, 0));
+		characters.add(new Character(CharacterType.PLAYER1, nRows -1, nCols - 1, 1000, true, 0));
+		characters.add(new Character(CharacterType.PLAYER2, nRows -1, nCols - 1, 1000, true, 0));
 		
 	}
 	
@@ -183,14 +183,26 @@ public class Level {
 		else turn = characters.get(0);
 	}
 	public boolean sendToJail() {
-		if ((getBoardAt(turn.getRow(), turn.getCol()).getName() == "goToJail" && !turn.isMove()) || turn.getSame() == 3) {
-			turn.setRow(nRows -1);
-			turn.setCol(0);
-			turn.setPosition(new Space(turn.getRow(), turn.getCol()));
-			turn.setMove(false);
+		if (getBoardAt(turn.getRow(), turn.getCol()).getName() == "goToJail" && !turn.isMove()) {
+			setJail();
+			return true;
+		}
+		if (turn.getSame() == 3) {
+			Object[] options = {"Yes", "No"};
+			boolean choice = Items.handleOption(options, "Jail", "You are now sent to jail due to rolling same dices for continuous 3 times.\nWould you like to pay $100 to be released?");
+			if (choice) turn.setMoney(turn.getMoney() - 100);
+			else {
+				turn.setMove(false);
+				setJail();
+			}
 			return true;
 		}
 		return false;
+	}
+	public void setJail() {
+		turn.setRow(nRows -1);
+		turn.setCol(0);
+		turn.setPosition(new Space(turn.getRow(), turn.getCol()));
 	}
 	
 	public boolean checkEnd() {
@@ -203,10 +215,9 @@ public class Level {
 	}
 	
 	public void resetGame() {
-		for (Character c: characters) {
-			characters.remove(c);
-		}
+		characters.clear();
 		setUp();
+		setBank(2000);
 		ChooseFirstTurn();
 	}
 	public static void main(String[] args)  {

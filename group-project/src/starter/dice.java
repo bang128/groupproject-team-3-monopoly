@@ -39,11 +39,6 @@ public class dice {
 		}
 	}
 	
-	public void gotToJail() {
-		if (totalSame==3) {
-			System.out.println("You have been sent to jail.");
-		}
-	}
 	
 	public static void main(String[] args) {
 		dice d= new dice();

@@ -22,6 +22,7 @@ public class MainApplication extends GraphicsApplication {
 	public static GImage sound_off = new GImage("sound_off.png", 10, WINDOW_HEIGHT - 40);
 	public static GButton returnButton = new GButton("Return to Menu", WINDOW_WIDTH - 100, WINDOW_HEIGHT - 40, 90,
 			30, new Color(102, 153, 255));
+	public static GImage background = new GImage("background.png", 0, 0);
 
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -35,12 +36,16 @@ public class MainApplication extends GraphicsApplication {
 		endPane = new EndPane(this);
 		returnButton.setColor(new Color(0, 26, 77));
 		switchToMenu();
+		background.setSize(WINDOW_WIDTH + 10, WINDOW_HEIGHT + 10);
+		
 	}
 
 	public void switchToMenu() {
 		//playRandomSound();
 		count++;
 		switchToScreen(menu);
+		add(background);
+		background.sendToBack();
 		add(sound_on);
 	}
 
@@ -52,6 +57,8 @@ public class MainApplication extends GraphicsApplication {
 	
 	public void switchToGraphicsGame() {
 		switchToScreen(graphicsGame);
+		add(background);
+		background.sendToBack();
 		addSomeButtons();
 	}
 	

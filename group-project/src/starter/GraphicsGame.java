@@ -45,11 +45,16 @@ public class GraphicsGame extends GraphicsPane {
 		this.program = app;
 		for (int i = 0; i < 7; i++)
 			dices.add(dices_name[i] + IMG_EXTENSION);
+		setPlayersAndMoneyLabel();
+		
+	}
+	public void setPlayersAndMoneyLabel() {
 		for (int i = 0; i < 2; i++) {
 			players.add(new GImage(player_name[i] + IMG_EXTENSION, level.characters.get(i).getCol() * SpaceWidth() + SPECIAL_WIDTH - 15, level.characters.get(i).getRow() * SpaceHeight() + SPECIAL_HEIGHT + 40*(i-1)));
 			money_label.add(new GLabel(""+level.characters.get(i).getMoney(), MONEY_LABEL_X[i], MONEY_LABEL_Y));
 		}
 	}
+
 	private double SpaceHeight() {
 		return (BOARD_HEIGHT - 2*SPECIAL_HEIGHT + 1)/(level.getnRows() - 2);
 	}
@@ -96,6 +101,7 @@ public class GraphicsGame extends GraphicsPane {
 			program.add(p);
 			program.add(image);
 		}
+		bank_money.setLabel("BANK: " + level.getBank());
 		bank_money.setFont(LABEL_FONT);
 		program.add(bank_money);
 	}
@@ -103,7 +109,6 @@ public class GraphicsGame extends GraphicsPane {
 	public void drawDices() {
 		dice1.setSize(DICE_SIZE, DICE_SIZE);
 		dice2.setSize(DICE_SIZE, DICE_SIZE);
-		dices_icon.setSize(200, 130);
 		program.add(dices_icon);
 	}
 
@@ -182,13 +187,10 @@ public class GraphicsGame extends GraphicsPane {
 			program.remove(dice2);
 			program.add(dices_icon);
 			click_dices = false;
-			if(level.checkEnd()) {
-				program.switchToEnd();
-			}
+			if(level.checkEnd()) reset();
 			else {
 				level.changeTurn();
 				turn_label.setLabel(level.getTurn().getType().toString().toUpperCase());
-				
 			}
 		}
 		
@@ -201,8 +203,8 @@ public class GraphicsGame extends GraphicsPane {
 	}
 	public void moveImage(int i) {
 		location(players.get(i), level.getTurn());
-		System.out.println((num1 + num2) + " " + level.getTurn());
-		System.out.println();
+		//System.out.println((num1 + num2) + " " + level.getTurn());
+		//System.out.println();
 		Items item = level.getBoardAt(level.getTurn().getRow(), level.getTurn().getCol());
 		int m = item.visit(level.getTurn());
 		if (level.sendToJail()) location(players.get(i), level.getTurn());
@@ -247,7 +249,7 @@ public class GraphicsGame extends GraphicsPane {
 				o.setSize(normal_horizontal);
 			}
 			program.add(o);
-			o.sendToBack();
+			i.sendToFront();	
 		}
 	}
 
@@ -270,6 +272,16 @@ public class GraphicsGame extends GraphicsPane {
 			y = SPECIAL_HEIGHT + (c.getRow() - 0.5)*SpaceHeight() - i.getHeight()/2;
 		}
 		i.setLocation(x, y);
+	}
+	
+	public void reset() {
+		MainApplication.continue_game = false;
+		program.removeAll();
+		level.resetGame();
+		players.clear();
+		money_label.clear();
+		setPlayersAndMoneyLabel();
+		program.switchToEnd();
 	}
 	
 	@Override

@@ -52,10 +52,10 @@ public class MenuPane extends GraphicsPane {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == start || obj == cont) {
 			program.switchToGraphicsGame();
-			System.out.println("Game Started \n");
+			//System.out.println("Game Started \n");
 		}
 		if (obj == quit) {
-			System.out.println("Game Quit\n");
+			//System.out.println("Game Quit\n");
 			System.exit(0);
 		}
 	}
