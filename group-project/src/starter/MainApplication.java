@@ -77,6 +77,11 @@ public class MainApplication extends GraphicsApplication {
 		if(getElementAt(e.getX(), e.getY()) == MainApplication.returnButton) 
 			switchToMenu();
 	}
+	
+	private void PlayRandomSound() {
+		AudioPlayer audio = AudioPlayer.getInstance();
+		audio.playSound(MUSIC_FOLDER, SOUND_FILES[count % SOUND_FILES.length]);
+	}
 //	private void playRandomSound() {
 //		AudioPlayer audio = AudioPlayer.getInstance();
 //		audio.playSound(MUSIC_FOLDER, SOUND_FILES[count % SOUND_FILES.length]);
