@@ -6,6 +6,8 @@ public class Level {
 	public ArrayList<Character> characters;
 	private int bank, nRows, nCols;
 	private Character turn;
+	private Character winner;
+	private Character loser;
 	
 	public Level(int nR, int nC) {
 		nRows = nR;
@@ -214,6 +216,31 @@ public class Level {
 		return false;
 	}
 	
+	public void winner() {
+	/*if(checkEnd()) {
+		if(characters.get(0)<characters.get(1))) {
+			
+		}*/
+		winner = characters.get(0);
+		for (Character c: characters) {
+			if(winner.getMoney() < c.getMoney()) {
+				winner = c;
+				
+			}
+		
+		}
+		///System.out.println("Winner");
+		loser = characters.get(0);
+		for(Character c:characters) {
+			if(loser.getMoney()>c.getMoney()) {
+				loser=c;
+				
+			}
+		}
+		//System.out.println("Loser");
+			
+	}
+	
 	public void resetGame() {
 		characters.clear();
 		setUp();
@@ -250,6 +277,18 @@ public class Level {
 		
 		l.moveNumSpaces(10);
 		System.out.println("Move 10: " + l.getTurn().getPosition());
+	}
+	public Character getWinner() {
+		return winner;
+	}
+	public void setWinner(Character winner) {
+		this.winner = winner;
+	}
+	public Character getLoser() {
+		return loser;
+	}
+	public void setLoser(Character loser) {
+		this.loser = loser;
 	}
 
 }

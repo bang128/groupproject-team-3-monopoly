@@ -24,6 +24,8 @@ public class MainApplication extends GraphicsApplication {
 			30, new Color(102, 153, 255));
 	public static GImage background = new GImage("background.png", 0, 0);
 
+	public  static Character winner = new Character(CharacterType.PLAYER1, 0,0,0,true,0); 
+	public static Character loser = new Character(CharacterType.PLAYER2, 0,0,0,true,0);
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	}

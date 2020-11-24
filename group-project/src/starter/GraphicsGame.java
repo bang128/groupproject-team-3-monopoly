@@ -41,6 +41,7 @@ public class GraphicsGame extends GraphicsPane {
 	private String[] dices_name = {"dice", "dice1", "dice2", "dice3", "dice4", "dice5", "dice6"};
 	private GLabel bank_money = new GLabel("BANK: " + level.getBank(),BOARD_WIDTH/2 - 70, BOARD_HEIGHT + INVENTORY_HEIGHT - 30);
 	
+	
 	public GraphicsGame(MainApplication app) {
 		this.program = app;
 		for (int i = 0; i < 7; i++)
@@ -187,7 +188,14 @@ public class GraphicsGame extends GraphicsPane {
 			program.remove(dice2);
 			program.add(dices_icon);
 			click_dices = false;
-			if(level.checkEnd()) reset();
+			if(level.checkEnd()) {
+				level.winner();
+				MainApplication.winner = level.getWinner();
+				MainApplication.loser = level.getLoser();
+				System.out.println("Winner");
+				System.out.println("loser");
+				reset();
+			}
 			else {
 				level.changeTurn();
 				turn_label.setLabel(level.getTurn().getType().toString().toUpperCase());
