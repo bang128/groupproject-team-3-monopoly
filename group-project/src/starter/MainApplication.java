@@ -15,6 +15,7 @@ public class MainApplication extends GraphicsApplication {
 	private MenuPane menu;
 	private GraphicsGame graphicsGame;
 	private EndPane endPane;
+	private InstructionPane instructionPane;
 	private int count;
 	
 	public static boolean continue_game = false;
@@ -36,6 +37,7 @@ public class MainApplication extends GraphicsApplication {
 		menu = new MenuPane(this);
 		graphicsGame = new GraphicsGame(this);
 		endPane = new EndPane(this);
+		instructionPane = new InstructionPane(this);
 		returnButton.setColor(new Color(0, 26, 77));
 		switchToMenu();
 		background.setSize(WINDOW_WIDTH + 10, WINDOW_HEIGHT + 10);
@@ -66,6 +68,12 @@ public class MainApplication extends GraphicsApplication {
 	
 	public void switchToEnd() {
 		switchToScreen(endPane);
+		addSomeButtons();
+	}
+	public void switchToInstruction() {
+		switchToScreen(instructionPane);
+		add(background);
+		background.sendToBack();
 		addSomeButtons();
 	}
 	
