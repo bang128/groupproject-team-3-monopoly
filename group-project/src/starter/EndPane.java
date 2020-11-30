@@ -27,8 +27,8 @@ public class EndPane extends GraphicsPane {
 		program.add(label);
 		System.out.println(MainApplication.winner);
 		System.out.println(MainApplication.loser);
-		winner = new GLabel(MainApplication.winner.getType().toString()+"Winner", 100,400);
-		loser = new GLabel(MainApplication.loser.getType().toString()+"loser", 100,500);
+		winner = new GLabel(MainApplication.winner.getType().toString()+" Winner", 100,400);
+		loser = new GLabel(MainApplication.loser.getType().toString()+" loser", 100,500);
 		program.add(winner);
 		program.add(loser);
 		
@@ -38,6 +38,8 @@ public class EndPane extends GraphicsPane {
 	@Override
 	public void hideContents() {
 		program.remove(label);
+		program.remove(winner);
+		program.remove(loser);
 		// TODO Auto-generated method stub
 		
 	}
