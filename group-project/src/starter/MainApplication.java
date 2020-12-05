@@ -69,6 +69,8 @@ public class MainApplication extends GraphicsApplication {
 	public void switchToEnd() {
 		switchToScreen(endPane);
 		addSomeButtons();
+		add(background);
+		background.sendToBack();
 	}
 	public void switchToInstruction() {
 		switchToScreen(instructionPane);

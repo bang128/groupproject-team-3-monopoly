@@ -5,8 +5,8 @@ public enum CharacterType {
 	
 	public String toString() {
 		switch(this) {
-			case PLAYER1: return "player1";
-			case PLAYER2: return "player2";
+			case PLAYER1: return "Player1";
+			case PLAYER2: return "Player2";
 		}
 		return "n/a";
 	}
