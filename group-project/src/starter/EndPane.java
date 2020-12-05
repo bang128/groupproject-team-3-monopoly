@@ -8,7 +8,7 @@ public class EndPane extends GraphicsPane {
 	private MainApplication program;
 	private GLabel label;
 	private GLabel winner, loser;
-	private GRect rect;
+	private GRect rect, rect1;
 	private GLine line;
 	
 	
@@ -30,24 +30,35 @@ public class EndPane extends GraphicsPane {
 		//System.out.println(MainApplication.winner);
 		//System.out.println(MainApplication.loser);
 		rect = new GRect(1, 300, 700, 200);
+		rect1 = new GRect(1, 400, 700, 100);
 		rect.setColor(new Color(215, 240, 247));
 		rect.setFilled(true);
-		rect.setFillColor(Color.DARK_GRAY);
+		rect.setFillColor(Color.LIGHT_GRAY);
 		rect.sendBackward();
 		program.add(rect);
-		winner = new GLabel("Winner:   " + MainApplication.winner.getType().toString(), 50,350);
-		loser = new GLabel("Loser:   " + MainApplication.loser.getType().toString(), 50,450);
-		winner.setColor(Color.orange);
-		loser.setColor(Color.yellow);
+		winner = new GLabel("Winner:\t\t\t" + MainApplication.winner.getType().toString(), 50,350);
+		loser = new GLabel("Loser:\t\t\t" + MainApplication.loser.getType().toString(), 50,450);
+		//winner.setColor(Color.orange);
+		//loser.setColor(Color.yellow);
 		winner.setFont("Arial-24");
 		loser.setFont("Arial-24");
 		program.add(winner);
 		program.add(loser);
-		
 		line = new GLine(1, 400, 700, 400);
 		program.add(line);
-		
+		if(MainApplication.winner.getType()==CharacterType.PLAYER1) {
+			winner.setColor(Color.YELLOW);
+			loser.setColor(Color.orange);
+		}
+		else if(MainApplication.loser.getType()==CharacterType.PLAYER1){
+			loser.setColor(Color.yellow);
+			winner.setColor(Color.orange);
+		}
 	}
+
+
+
+	
 
 	@Override
 	public void hideContents() {
