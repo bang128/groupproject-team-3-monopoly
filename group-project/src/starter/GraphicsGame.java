@@ -24,7 +24,6 @@ public class GraphicsGame extends GraphicsPane {
 	private GDimension special = new GDimension(SPECIAL_WIDTH -1, SPECIAL_HEIGHT - 1);
 	private GDimension normal_vertical = new GDimension(SpaceWidth() - 1, SPECIAL_HEIGHT - 1);
 	private GDimension normal_horizontal = new GDimension(SPECIAL_WIDTH - 1, SpaceHeight() - 1);
-	private Items[][] board = level.getBoard();
 	private MainApplication program;
 	private GImage dice1 = new GImage("dice.png", BOARD_WIDTH/2 - 125, BOARD_HEIGHT/2 - 50);
 	private GImage dice2 = new GImage("dice.png", BOARD_WIDTH/2 + 25, BOARD_HEIGHT/2 - 50);
@@ -114,6 +113,7 @@ public class GraphicsGame extends GraphicsPane {
 	}
 
 	public void drawItems() {
+		Items[][] board = level.getBoard();
 		GImage go_pic = new GImage("go.png", BOARD_WIDTH - SPECIAL_WIDTH + 1, BOARD_HEIGHT - SPECIAL_HEIGHT + 1);
 		go_pic.setSize(special);
 		program.add(go_pic);
