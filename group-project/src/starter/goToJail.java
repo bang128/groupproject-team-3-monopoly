@@ -11,7 +11,7 @@ public class goToJail extends Items{
 	public int visit (Character Player) {
 		if(Player.isMove()) {
 			Object[] options = {"Yes", "No"};
-			boolean choice = handleOption(options, "Go to Jail", "You are being sent to Jail. Would you like to pay $100 to be released?");
+			boolean choice = handleOption(options, "Go to Jail", "You are being sent to Jail. Would you like to pay $100 to be released?", "go_to_jail.png");
 			if (choice) {
 				Player.setMoney(Player.getMoney() - 100);
 				return 100;

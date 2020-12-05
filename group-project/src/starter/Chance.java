@@ -23,7 +23,7 @@ public class Chance extends Items {
 		 Random r = new Random();
 		 int r_2 = r.nextInt(100);
 		 Object[] options = { "OK" };
-			boolean choice = handleOption(options, "Chance", "Oops! Your chance card says that you lose $" + r_2);
+			boolean choice = handleOption(options, "Chance", "Oops! Your chance card says that you lose $" + r_2, "chance_v_b.png");
 			if (choice)
 				Player.setMoney(Player.getMoney() - r_2);
 			return r_2;
@@ -33,7 +33,7 @@ public class Chance extends Items {
 		Random r = new Random();
 		int r_1=r.nextInt(100) ;
 		 Object[] options = { "OK" };
-			boolean choice = handleOption(options, "Chance", "Wonderful! Your chance card says that you win $" + r_1);
+			boolean choice = handleOption(options, "Chance", "Wonderful! Your chance card says that you win $" + r_1, "chance_v_b.png");
 			if (choice)
 				Player.setMoney(Player.getMoney() + r_1);
 			return -r_1;

@@ -8,7 +8,7 @@ public class EndPane extends GraphicsPane {
 	private MainApplication program;
 	private GLabel label;
 	private GLabel winner, loser;
-	private GRect rect, rect1;
+	private GRect rect;
 	private GLine line;
 	
 	
@@ -27,32 +27,29 @@ public class EndPane extends GraphicsPane {
 	public void showContents() {
 		// TODO Auto-generated method stub
 		program.add(label);
-		//System.out.println(MainApplication.winner);
-		//System.out.println(MainApplication.loser);
-		rect = new GRect(1, 300, 700, 200);
-		rect1 = new GRect(1, 400, 700, 100);
+		rect = new GRect(1, 300, MainApplication.WINDOW_WIDTH - 3, 200);
 		rect.setColor(new Color(215, 240, 247));
 		rect.setFilled(true);
-		rect.setFillColor(Color.LIGHT_GRAY);
+		rect.setFillColor(new Color(153, 179, 230));
 		rect.sendBackward();
 		program.add(rect);
-		winner = new GLabel("Winner:\t\t\t" + MainApplication.winner.getType().toString(), 50,350);
-		loser = new GLabel("Loser:\t\t\t" + MainApplication.loser.getType().toString(), 50,450);
-		//winner.setColor(Color.orange);
-		//loser.setColor(Color.yellow);
-		winner.setFont("Arial-24");
-		loser.setFont("Arial-24");
+		winner = new GLabel("Winner:  " + MainApplication.winner.getType().toString(), MainApplication.WINDOW_WIDTH/2 - 90,350);
+		loser = new GLabel("Loser:   " + MainApplication.loser.getType().toString(), MainApplication.WINDOW_WIDTH/2 - 90,450);
+		
+		winner.setFont("Arial-Bold-24");
+		loser.setFont("Arial-Bold-24");
 		program.add(winner);
 		program.add(loser);
 		line = new GLine(1, 400, 700, 400);
+		line.setColor(new Color(215, 240, 247));
 		program.add(line);
 		if(MainApplication.winner.getType()==CharacterType.PLAYER1) {
-			winner.setColor(Color.YELLOW);
-			loser.setColor(Color.orange);
+			winner.setColor(Color.yellow);
+			loser.setColor(new Color(255, 128, 0));
 		}
 		else if(MainApplication.loser.getType()==CharacterType.PLAYER1){
+			winner.setColor(new Color(255, 128, 0));
 			loser.setColor(Color.yellow);
-			winner.setColor(Color.orange);
 		}
 	}
 

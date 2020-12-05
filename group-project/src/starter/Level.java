@@ -146,7 +146,6 @@ public class Level {
 				else turn.move(0, (-1)*numSpaces);
 			}
 		}
-		//System.out.println(turn);
 	}
 	public Items[][] getBoard() {
 		return board;
@@ -191,7 +190,7 @@ public class Level {
 		}
 		if (turn.getSame() == 3) {
 			Object[] options = {"Yes", "No"};
-			boolean choice = Items.handleOption(options, "Jail", "You are now sent to jail due to rolling same dices for continuous 3 times.\nWould you like to pay $100 to be released?");
+			boolean choice = Items.handleOption(options, "Jail", "You are now sent to jail due to rolling same dices for continuous 3 times.\nWould you like to pay $100 to be released?", "jail.png");
 			if (choice) turn.setMoney(turn.getMoney() - 100);
 			else {
 				turn.setMove(false);
@@ -217,28 +216,16 @@ public class Level {
 	}
 	
 	public void winner() {
-	/*if(checkEnd()) {
-		if(characters.get(0)<characters.get(1))) {
-			
-		}*/
 		winner = characters.get(0);
 		for (Character c: characters) {
-			if(winner.getMoney() < c.getMoney()) {
+			if(winner.getMoney() < c.getMoney())
 				winner = c;
-				
-			}
-		
 		}
-		///System.out.println("Winner");
 		loser = characters.get(0);
 		for(Character c:characters) {
-			if(loser.getMoney()>c.getMoney()) {
+			if(loser.getMoney()>c.getMoney())
 				loser=c;
-				
-			}
 		}
-		//System.out.println("Loser");
-			
 	}
 	
 	public void resetGame() {
@@ -250,7 +237,6 @@ public class Level {
 	public static void main(String[] args)  {
 		Level l = new Level(11,11);
 		System.out.println(l.getTurn().getPosition());
-		//System.out.print(l.getTurn().ifIWereToMove(0, -15) + "\n");
 		l.moveNumSpaces(15);
 		System.out.println("Move 15:" + l.getTurn().getPosition());
 		

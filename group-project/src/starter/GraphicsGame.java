@@ -216,7 +216,21 @@ public class GraphicsGame extends GraphicsPane {
 		Items item = level.getBoardAt(level.getTurn().getRow(), level.getTurn().getCol());
 		int m = item.visit(level.getTurn());
 		if (level.sendToJail()) location(players.get(i), level.getTurn());
-		if(item.getName() == "owned" && item.getOwner() != level.getTurn()) {
+		boolean owned = false;
+		/*for (Character c:level.characters) {
+			System.out.println(c.getType().toString() + "_owned         " + item.getName());
+			if(item.getName() == (c.getType().toString() + "_owned")) {
+				owned = true;
+			}
+		}*/
+		System.out.println(item.getName());
+		if(item.getName() == "player1_owned" || item.getName() == "player2_owned") owned = true;
+		
+		System.out.println("Owner: " + item.getOwner());
+		System.out.println("Turn: " + level.getTurn());
+		System.out.println(owned);
+		System.out.println();
+		if(item.getOwner() != null && item.getOwner() != level.getTurn()) {
 			switch (i) {
 			case 0:
 				level.characters.get(1).setMoney(level.characters.get(1).getMoney() + m);

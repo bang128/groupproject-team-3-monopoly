@@ -1,6 +1,8 @@
 package starter;
 
 import java.lang.Object;
+
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Items {
@@ -25,9 +27,9 @@ public class Items {
 		return name;
 	}
 	
-	public static boolean handleOption(Object[] options, String popup_name, String message) {
+	public static boolean handleOption(Object[] options, String popup_name, String message, String icon) {
 		int choice = JOptionPane.showOptionDialog(null, message, popup_name, JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+				JOptionPane.QUESTION_MESSAGE, new ImageIcon(icon), options, options[0]);
 		if (choice == JOptionPane.YES_OPTION) {  
 			return true;
 		}
