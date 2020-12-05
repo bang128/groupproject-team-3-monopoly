@@ -7,9 +7,6 @@ import acm.graphics.*;
 public class EndPane extends GraphicsPane {
 	private MainApplication program;
 	private GLabel label;
-	private GImage Image;
-	private Character player;
-	private Level l;
 	private GLabel winner, loser;
 	private GRect rect;
 	private GLine line;
