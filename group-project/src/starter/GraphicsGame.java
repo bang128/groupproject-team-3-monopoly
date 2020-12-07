@@ -192,8 +192,6 @@ public class GraphicsGame extends GraphicsPane {
 				level.winner();
 				MainApplication.winner = level.getWinner();
 				MainApplication.loser = level.getLoser();
-				System.out.println("Winner");
-				System.out.println("loser");
 				reset();
 			}
 			else {
@@ -211,25 +209,10 @@ public class GraphicsGame extends GraphicsPane {
 	}
 	public void moveImage(int i) {
 		location(players.get(i), level.getTurn());
-		//System.out.println((num1 + num2) + " " + level.getTurn());
-		//System.out.println();
 		Items item = level.getBoardAt(level.getTurn().getRow(), level.getTurn().getCol());
 		int m = item.visit(level.getTurn());
 		if (level.sendToJail()) location(players.get(i), level.getTurn());
-		boolean owned = false;
-		/*for (Character c:level.characters) {
-			System.out.println(c.getType().toString() + "_owned         " + item.getName());
-			if(item.getName() == (c.getType().toString() + "_owned")) {
-				owned = true;
-			}
-		}*/
-		System.out.println(item.getName());
-		if(item.getName() == "player1_owned" || item.getName() == "player2_owned") owned = true;
 		
-		System.out.println("Owner: " + item.getOwner());
-		System.out.println("Turn: " + level.getTurn());
-		System.out.println(owned);
-		System.out.println();
 		if(item.getOwner() != null && item.getOwner() != level.getTurn()) {
 			switch (i) {
 			case 0:
