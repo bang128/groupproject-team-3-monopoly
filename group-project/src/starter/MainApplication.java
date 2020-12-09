@@ -85,12 +85,16 @@ public class MainApplication extends GraphicsApplication {
 		switchToScreen(instructionPane);
 		add(background);
 		background.sendToBack();
-		addSomeButtons();
 	}
 	
 	public void addSomeButtons() {
 		add(returnButton);
 		add(sound_button);
+	}
+	
+	public void removeSomeButtons() {
+		remove(returnButton);
+		remove(sound_button);
 	}
 	
 	@Override 

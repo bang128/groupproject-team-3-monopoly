@@ -16,13 +16,17 @@ public class InstructionPane extends GraphicsPane {
 		label.setFont(font);
 		label.setColor(new Color(153, 0, 51));
 		content = new GImage("content.png", 40, 140);
+
 	}
+	
+
 
 	@Override
 	public void showContents() {
 		// TODO Auto-generated method stub
 		program.add(content);
 		program.add(label);
+		program.addSomeButtons();
 		
 	}
 
@@ -31,5 +35,6 @@ public class InstructionPane extends GraphicsPane {
 		// TODO Auto-generated method stub	
 		program.remove(content);
 		program.remove(label);
+		program.removeSomeButtons();
 	}
 }
