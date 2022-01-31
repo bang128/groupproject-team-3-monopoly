@@ -16,6 +16,7 @@ public class MainApplication extends GraphicsApplication {
 	private GraphicsGame graphicsGame;
 	private EndPane endPane;
 	private InstructionPane instructionPane;
+	private SettingPane settingPane;
 	private boolean AtEndPane = false;
 	
 	public static boolean continue_game = false;
@@ -35,6 +36,7 @@ public class MainApplication extends GraphicsApplication {
 		System.out.println("Welcome to Monopoly \n");
 		somePane = new SomePane(this);
 		menu = new MenuPane(this);
+		settingPane = new SettingPane(this);
 		graphicsGame = new GraphicsGame(this);
 		endPane = new EndPane(this);
 		instructionPane = new InstructionPane(this);
@@ -43,6 +45,7 @@ public class MainApplication extends GraphicsApplication {
 		background.setSize(WINDOW_WIDTH + 10, WINDOW_HEIGHT + 10);
 		
 	}
+	
 
 	public void switchToMenu() {
 		//playRandomSound();
@@ -53,6 +56,7 @@ public class MainApplication extends GraphicsApplication {
 		background.sendToBack();
 		add(sound_button);
 	}
+	
 
 	public void switchToSome() {
 		//playRandomSound();
@@ -83,6 +87,16 @@ public class MainApplication extends GraphicsApplication {
 		AtEndPane = false;
 		PlaySound();
 		switchToScreen(instructionPane);
+		addSomeButtons();
+		add(background);
+		background.sendToBack();
+	}
+	
+	public void switchToSetting() {
+		AtEndPane = false;
+		PlaySound();
+		switchToScreen(settingPane);
+		addSomeButtons();
 		add(background);
 		background.sendToBack();
 	}

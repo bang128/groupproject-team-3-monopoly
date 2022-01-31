@@ -17,16 +17,18 @@ public class MenuPane extends GraphicsPane {
 	private GImage quit;
 	private GImage icon;
 	private GImage instruction;
+	private GImage setting;
 	
 	public MenuPane(MainApplication app) {
 		super();
 		program = app;
-		label = new GLabel("Welcome to Monopoly", 150, 250);
+		label = new GLabel("Welcome to Monopoly", 150, 200);
 		label.setFont("Comic Sans MS-40");
-		start = new GImage("start.png", button_width, 350);
-		cont = new GImage("continue.png", button_width, 350);
-		instruction = new GImage ("instruction.png", button_width, 500);
-		quit = new GImage("quit_button.png", button_width, 650);
+		start = new GImage("start.png", button_width, 300);
+		cont = new GImage("continue.png", button_width, 300);
+		setting = new GImage("setting_button.png", button_width, 425);
+		instruction = new GImage("instruction.png", button_width, 550);
+		quit = new GImage("quit_button.png", button_width, 675);
 		icon = new GImage("icon.png", 10, 10);
 		icon.setSize(150, 150);
 	}
@@ -35,6 +37,7 @@ public class MenuPane extends GraphicsPane {
 	public void showContents() {
 		if(!MainApplication.continue_game) program.add(start);
 		else program.add(cont);
+		program.add(setting);
 		program.add(instruction);
 		program.add(quit);
 		program.add(label);
@@ -45,6 +48,7 @@ public class MenuPane extends GraphicsPane {
 	public void hideContents() {
 		program.remove(start);
 		program.remove(cont);
+		program.remove(setting);
 		program.remove(instruction);
 		program.remove(quit);
 		program.remove(label);
@@ -61,6 +65,11 @@ public class MenuPane extends GraphicsPane {
 		if (obj == instruction) {
 			program.switchToInstruction();
 		}
+		
+		if (obj == setting) {
+			program.switchToSetting();
+		}
+		
 		if (obj == quit) {
 			//System.out.println("Game Quit\n");
 			System.exit(0);
