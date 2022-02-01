@@ -19,6 +19,7 @@ public class GraphicsGame extends GraphicsPane {
 	public static final String EXIT_SIGN = "EXIT";
 	public static final String IMG_FILENAME_PATH = "images/";
 	public static final String IMG_EXTENSION = ".png";
+	public static String[] player_name = {"icon_ops/op1", "icon_ops/op2"};
 	
 	private Level level = new Level(11,11);
 	private GDimension special = new GDimension(SPECIAL_WIDTH -1, SPECIAL_HEIGHT - 1);
@@ -36,7 +37,7 @@ public class GraphicsGame extends GraphicsPane {
 	private ArrayList<GImage> players = new ArrayList<GImage>();
 	private GLabel turn_label = new GLabel(level.getTurn().getType().toString().toUpperCase(), BOARD_WIDTH/2 -80, BOARD_HEIGHT + INVENTORY_HEIGHT/2 + 20);
 	private ArrayList<GLabel> money_label = new ArrayList<GLabel>();	
-	private String[] player_name = {"player1", "player2"};
+	
 	private String[] dices_name = {"dice", "dice1", "dice2", "dice3", "dice4", "dice5", "dice6"};
 	private GLabel bank_money = new GLabel("BANK: " + level.getBank(),BOARD_WIDTH/2 - 70, BOARD_HEIGHT + INVENTORY_HEIGHT - 30);
 	
@@ -45,12 +46,13 @@ public class GraphicsGame extends GraphicsPane {
 		this.program = app;
 		for (int i = 0; i < 7; i++)
 			dices.add(dices_name[i] + IMG_EXTENSION);
-		setPlayersAndMoneyLabel();
+		
 		
 	}
 	public void setPlayersAndMoneyLabel() {
 		for (int i = 0; i < 2; i++) {
 			players.add(new GImage(player_name[i] + IMG_EXTENSION, level.characters.get(i).getCol() * SpaceWidth() + SPECIAL_WIDTH - 15, level.characters.get(i).getRow() * SpaceHeight() + SPECIAL_HEIGHT + 40*(i-1)));
+			players.get(i).setSize(45,45);
 			money_label.add(new GLabel(""+level.characters.get(i).getMoney(), MONEY_LABEL_X[i], MONEY_LABEL_Y));
 		}
 	}
@@ -95,7 +97,8 @@ public class GraphicsGame extends GraphicsPane {
 		for(int i = 0; i < 2; i++) {
 			GLabel p = new GLabel(level.characters.get(i).getType().toString().toUpperCase(), MONEY_LABEL_X[i] - i*40, MONEY_LABEL_Y - 40);
 			p.setFont(LABEL_FONT);
-			GImage image = new GImage(player_name[i] + IMG_EXTENSION, MONEY_LABEL_X[i] + i*15, MONEY_LABEL_Y - 110);
+			GImage image = new GImage(player_name[i] + IMG_EXTENSION, MONEY_LABEL_X[i] - i*15, MONEY_LABEL_Y - 130);
+			image.setSize(70,70);
 			money_label.get(i).setFont(LABEL_FONT);
 			program.add(money_label.get(i));
 			program.add(p);
@@ -294,6 +297,7 @@ public class GraphicsGame extends GraphicsPane {
 		// TODO Auto-generated method stub
 		//reset();
 		MainApplication.continue_game = true;
+		setPlayersAndMoneyLabel();
 		drawAllBoard();
 	}
 	@Override

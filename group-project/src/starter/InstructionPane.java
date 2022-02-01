@@ -26,7 +26,7 @@ public class InstructionPane extends GraphicsPane {
 		// TODO Auto-generated method stub
 		program.add(content);
 		program.add(label);
-		program.addSomeButtons();
+		//program.addSomeButtons();
 		
 	}
 
@@ -35,6 +35,6 @@ public class InstructionPane extends GraphicsPane {
 		// TODO Auto-generated method stub	
 		program.remove(content);
 		program.remove(label);
-		program.removeSomeButtons();
+		//program.removeSomeButtons();
 	}
 }
